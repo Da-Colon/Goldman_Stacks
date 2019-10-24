@@ -1,0 +1,38 @@
+CREATE TABLE users ( 
+    id SERIAL PRIMARY KEY, 
+    first_name TEXT, 
+    last_name TEXT, 
+    email TEXT
+);
+
+
+CREATE TABLE positions ( 
+    id SERIAL PRIMARY KEY, 
+    user_id INTEGER REFERENCES users(id),
+    ticker TEXT,
+    company_name TEXT,
+    num_shares NUMERIC,
+    cost_basis NUMERIC
+);
+
+CREATE TABLE transactions ( 
+    id SERIAL PRIMARY KEY, 
+    user_id INTEGER REFERENCES users(id),
+    ticker TEXT,
+    buy_sell TEXT,
+    num_shares NUMERIC,
+    stock_price NUMERIC,
+    txn_date TIMESTAMP
+);
+
+INSERT INTO users (first_name,last_name,email) VALUES
+    ('David','Colon','david@colon.com'),
+    ('Puja','Fitzpatrick','puja@fitz.com'),
+    ('Josh','Marbert','josh@marbert.com');
+INSERT INTO positions (user_id,ticker,company_name,num_shares,cost_basis) VALUES
+    (1,'AAPL','Apple','100','24204'),
+    (1,'GE','General Electric','2784','25000.32');
+INSERT INTO transactions (user_id,ticker,buy_sell,num_shares,stock_price,txn_date) VALUES
+    (1,'AAPL','B','100','242.04','2016-06-06 19:10:25'),
+    (1,'GE','B','2784','8.98','2015-04-22 09:15:25');
+
