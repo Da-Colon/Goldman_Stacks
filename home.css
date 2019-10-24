@@ -1,0 +1,206 @@
+html {
+  box-sizing: border-box;
+  font-size: 18px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 0 50px;
+}
+
+h1, h2, h3, p {
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+p {
+  padding: 0.4rem;
+}
+
+
+
+
+/*
+  HEADER
+*/
+header {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.logo-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-right: auto;
+}
+
+header img {
+  width: 50px;
+}
+
+
+
+/*
+  MAIN POSITIONING
+*/
+main {
+  display: grid;
+  grid-template-columns: 2fr 5fr 2fr;
+  grid-template-areas: "left center right";
+}
+
+.left-sidebar {
+  grid-area: "left";
+}
+
+.center-column {
+  grid-area: "center";
+  border-radius: 30px;
+  position: relative;
+  top: -90px;
+  box-shadow: 0px 20px 40px 20px rgba(0, 0, 0, 0.07);
+}
+
+.right-sidebar {
+  grid-area: "right";
+}
+
+
+
+/*
+  CARD STYLES
+*/
+.left-sidebar {
+  padding-right: 30px;
+}
+.right-sidebar {
+  padding-left: 30px;
+}
+
+.small-card {
+  margin-bottom: 40px;
+}
+
+.small-card-title {
+  margin-bottom: 12px;
+}
+
+.left-sidebar .small-card-title {
+  text-align: right;
+}
+
+.single-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.single-item>p {
+  display: inline-block;
+}
+
+.small-card.ticker p {
+  font-size: 1.15rem;
+}
+
+
+/*
+  CENTER COLUMN
+*/
+.center-column {
+  padding: 40px 50px;
+  margin: 0 10px;
+}
+
+.page-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  /* font-size: 1.7rem; */
+  font-weight: 200;
+}
+
+.full-graph {
+  width: 60%;
+  margin: 0 auto;
+  display: block;
+}
+
+.large-card {
+  margin-bottom: 30px;
+}
+
+.position-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin: 10px 0;
+}
+
+.buy-sell {
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: 1fr 1fr;
+}
+
+.buy-button, .sell-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  padding: 0 8px;
+}
+
+.buy-button {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.sell-button {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.up-down-percent {
+  text-align: center;
+}
+
+.position-amount {
+  text-align: right;
+}
+
+.view-all-button {
+  display: inline-block;
+  padding: 3px 15px;
+  border-radius: 10px;
+  border: 1px solid black;
+  margin: 0 auto;
+}
+
+.view-all-button-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
