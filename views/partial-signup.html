@@ -1,18 +1,39 @@
-<form action="/users/signup" method="POST">
-    <label>
-        First Name
-        <input type="text" aria-placeholder="First Name" name="first_name">
-    </label>
-    <label>
-        Last Name
-        <input type="text" aria-placeholder="Last Name" name="last_name">
-    </label>
-    <label>Email
-        <input type="text" aria-placeholder="Email Address" name="email_address">
-    </label>
-    <label>
-        Select a Password
-        <input type="password" aria-placeholder="Set Your Password" name="password">
-    </label>
-    <button type="submit">Create my Account</button>
-</form>
+<head>
+    <link rel="stylesheet" href="../stylesheets/signup.css">
+</head>
+
+<div class="title-ctn">
+    <h1>Create Your Portfolio</h1>
+    <h5>Create your account to have access to our site</h5>
+</div>
+
+<main class="main-ctn">
+
+    <div class="signup--wrapper">
+        <form action="/users/signup" method="POST">
+
+            <label>First Name
+                <input type="text" aria-placeholder="First Name" name="first_name">
+            </label>
+
+            <label>Last Name
+                <input type="text" aria-placeholder="Last Name" name="last_name">
+            </label>
+
+            <label>Email Address
+                <input type="text" aria-placeholder="Email Address" name="email_address">
+            </label>
+
+            <label>Select a Password
+                <input type="password" aria-placeholder="Set Your Password" name="password">
+            </label>
+
+            <label>Comfirm Password
+                <input type="password" aria-placeholder="Comfirm Your Password" name="comfirm_password">
+            </label>
+
+            <button type="submit">Create my Account</button>
+
+        </form>
+    </div>
+</main>
