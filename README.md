@@ -1,6 +1,6 @@
 # Back-End Project for DigitalCrafts 
 
-<!-- INSERT STILL/gif of project -->
+<!-- INSERT STILL/gif (DEMO) of project -->
 
 Project to do such & such using HTML, CSS, and JavaScript, etc.
 
