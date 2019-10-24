@@ -5,7 +5,8 @@ const logger = require("morgan");
 const es6Renderer = require("express-es6-template-engine");
 const compression = require("compression");
 const helmet = require("helmet");
-const cors = requrie("cors");
+const cors = require("cors");
+
 
 require("dotenv").config();
 
@@ -28,18 +29,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(express.static(path.join(__dirname, "public")));
-app.use(
-    session({
-        store: new Filestore(),
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: true,
-        is_logged_in: false
-    }));
+// -----UNCOMMENT WHEN READY TO USE--------
+// app.use(session({
+//     store: new Filestore(),
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//     is_logged_in: false
+// }));
 
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+// app.use("/users", usersRouter);
 
 module.exports = app;
