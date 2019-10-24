@@ -1,6 +1,6 @@
-// const express = require("express");
-// const bcrypt = require("bcryptjs");
-// const router = express.Router();
+const express = require("express");
+const bcrypt = require("bcryptjs");
+const router = express.Router();
 // const UserModel = require("../models/users");
 
 // router.get("/login", async(req, res, next) => {
@@ -16,17 +16,17 @@
 //     });
 // });
 
-// router.get("/signup", async(req, res, next) => {
-//     res.render("template", {
-//         locals: {
-//             title: "Sign Up",
-//             isLoggedIn: req.session.is_logged_in
-//         },
-//         partials: {
-//             partial: "partial-signup"
-//         }
-//     });
-// });
+router.get("/signup", async(req, res, next) => {
+    res.render("template", {
+        locals: {
+            title: "Sign Up"
+                // isLoggedIn: req.session.is_logged_in
+        },
+        partials: {
+            partial: "partial-signup"
+        }
+    });
+});
 
 // router.post("/signup", async(req, res, next) => {
 //     const { first_name, last_name, email_address } = req.body;
@@ -68,4 +68,4 @@
 //     }
 // });
 
-// module.exports = router;
+module.exports = router;
