@@ -1,1 +1,27 @@
-<h1>SPLASH PAGE</h1>
+<head>
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+</head>
+
+<div class="yellow_background"></div>
+
+
+
+<nav>
+    <div class="login-ctn">
+
+        <form action="/users/login" method="POST">
+            <label> Email Address
+                <input type="text" aria-placeholder="Email Address" name="email_address">
+            </label>
+            <label> Password
+                <input type="password" aria-placeholder="Password" name="password">
+            </label>
+
+            <button type="submit">Login</button>
+        </form>
+
+    </div>
+</nav>
+
+<h1>Goldman Sacks</h1>
+<h2>Don't have an account <span> <a href="./users/signup"> Click Here </a></span>to sign up!!</h2>
