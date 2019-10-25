@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+.container {
+    min-height: 100vh;
+}
+
+.yellow_background {
+    background-color: rgb(202, 162, 230);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    z-index: -5;
+    border-radius: 0 0% 35% 35%;
+}
