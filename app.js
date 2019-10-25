@@ -7,6 +7,9 @@ const compression = require("compression");
 const helmet = require("helmet");
 const cors = require("cors");
 
+const session = require('express-session');
+const Filestore = require('session-file-store')(session);
+
 
 require("dotenv").config();
 
@@ -29,14 +32,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// -----UNCOMMENT WHEN READY TO USE--------
-// app.use(session({
-//     store: new Filestore(),
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: true,
-//     is_logged_in: false
-// }));
+
+app.use(session({
+    store: new Filestore(),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    is_logged_in: false
+}));
 
 
 app.use("/", indexRouter);

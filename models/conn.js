@@ -6,7 +6,7 @@ const pgp = require("pg-promise")({
 
 const options = {
     host: "localhost",
-    database: "goldmanstacks" // CHANGE to DATEBASE
+    database: "goldmanstacks"
 };
 
 const db = pgp(options);
