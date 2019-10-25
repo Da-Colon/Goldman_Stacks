@@ -426,7 +426,9 @@ h1 .up-arrow, h1 .down-arrow {
   main {
     grid-template-columns: 1fr;
     grid-template-rows: minmax(0, max-content);
-    grid-template-areas: "center" "left" "right";
+    grid-template-areas: "center" 
+                          "left" 
+                          "right";
     padding: 0;
     margin: 0;
     width: 100%;
