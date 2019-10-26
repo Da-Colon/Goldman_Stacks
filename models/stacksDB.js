@@ -345,7 +345,6 @@ async function updateUserPortfolioNoClose(userID, portfolioValue, valueDateStrin
 
 
 
-
 // getAllUniqueTickers();
 // getAllUsers();
 // buyStock(1, 'AMZN', 4, 150, 'Amazon');

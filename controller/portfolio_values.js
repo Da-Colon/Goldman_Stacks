@@ -133,5 +133,11 @@ async function getLeaderboardUsers(currentUserID) {
 
 }
 
+
+module.exports = {
+  updatePortfolioValuesIfNeeded,
+  getLeaderboardUsers
+}
+
 // updatePortfolioValuesIfNeeded();
 // getLeaderboardUsers(1);
