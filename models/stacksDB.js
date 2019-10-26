@@ -1,4 +1,5 @@
 const db = require('./conn');
+const Moment = require('moment');
 
 // NOTE: When a new user signs up, we need to create a position for them in the positions table with their initial $100,000
 
@@ -275,24 +276,96 @@ async function giveNewUserInitialCash(userID) {
     return;
 }
 
+// Returns all positions for a given user
 async function returnAllPositionsInPortfolio(userID) {
 
-    let response;
+    let positions;
     // Grab all current positions
     try {
-        response = await db.any(`SELECT * FROM positions WHERE user_id = $1;`, [userID]);
-        // console.log(response);
-    } catch (err) {
-        console.log(`ERROR: All position query from stacksDB.returnAllPositionsInPortfolio method failed.`);
-        db.$pool.end();
-        return;
+      positions = await db.any(`SELECT * FROM positions WHERE user_id = $1;`, [userID]);
+      // console.log(positions);
+    } catch(err) {
+      console.log(`ERROR: All position query from stacksDB.returnAllPositionsInPortfolio method failed.`);
+      console.log(err);
+      // db.$pool.end(); return;
     }
 
     db.$pool.end();
-    return response;
+    return positions;
+}
+
+// Returns all positions for a given user, doesn't close the db connection
+async function returnAllPositionsInPortfolioNoClose(userID) {
+
+    let positions;
+    // Grab all current positions
+    try {
+      positions = await db.any(`SELECT * FROM positions WHERE user_id = $1;`, [userID]);
+      // console.log(positions);
+    } catch(err) {
+      console.log(`ERROR: All position query from stacksDB.returnAllPositionsInPortfolio method failed.`);
+      console.log(err);
+      db.$pool.end(); return;
+    }
+
+    // console.log("Reached the end of the function anyways");
+    // db.$pool.end();
+    return positions;
+}
+
+// Query the DB for all users (excludes email and password from results)
+async function getAllUsersNoClose() {
+
+  let users;
+  
+  try {
+    users = await db.query(`SELECT id, first_name, last_name, portfolio_value, value_date FROM users;`);
+    // console.log(users);
+  } catch(err) {
+    console.log(`ERROR: All users query from stacksDB.getAllUsers method failed.`);
+    db.$pool.end(); return;
+  }
+
+  return users;
+}
+
+// Return a list of all unique tickers in the positions DB
+async function getAllUniqueTickersNoClose() {
+
+  let tickers;
+  
+  try {
+    tickers = await db.any(`SELECT DISTINCT ticker FROM positions;`);
+    // console.log(tickers);
+  } catch(err) {
+    console.log(`ERROR: All distinct ticker symbols query from stacksDB.getAllUniqueTickers method failed.`);
+    db.$pool.end();
+    return;
+  }
+
+  // db.$pool.end();
+  return tickers;
+
+}
+
+// Update a user's portfolio_value and value_date
+async function updateUserPortfolioNoClose(userID, portfolioValue, valueDateString) {
+
+  let updatePortfolioValue;
+  try {
+    updatePortfolioValue = await db.result(`UPDATE users SET portfolio_value = $1, value_date = $2 WHERE id = $3;`, [portfolioValue, valueDateString, userID]);
+  } catch(err) {
+    console.log(`ERROR: Issue when posting the updated user portfolio values for userID ${userID} with the stacksDB.updateUserPortfolioNoClose method.`);
+    db.$pool.end(); return;
+  }
+
+  return;
 }
 
 
+
+// getAllUniqueTickers();
+// getAllUsers();
 // buyStock(1, 'AMZN', 4, 150, 'Amazon');
 // sellStock(1, 'AMZN', 4, 150);
 // giveNewUserInitialCash(3);
@@ -300,8 +373,12 @@ async function returnAllPositionsInPortfolio(userID) {
 
 
 module.exports = {
-    buyStock,
-    sellStock,
-    giveNewUserInitialCash,
-    returnAllPositionsInPortfolio
+  buyStock,
+  sellStock,
+  giveNewUserInitialCash,
+  returnAllPositionsInPortfolio,
+  returnAllPositionsInPortfolioNoClose,
+  getAllUsersNoClose,
+  getAllUniqueTickersNoClose,
+  updateUserPortfolioNoClose
 };

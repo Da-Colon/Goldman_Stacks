@@ -9,7 +9,7 @@ async function getPortfolioValues(userID) {
 
   // Extracts the number of shares
   let allPositionQuantities = {};
-    allPositions.forEach((item) => {
+  allPositions.forEach((item) => {
     allPositionQuantities[item.ticker] = item.num_shares;
   })
 

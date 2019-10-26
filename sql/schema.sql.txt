@@ -25,5 +25,11 @@ CREATE TABLE transactions (
     txn_date TIMESTAMP NOT NULL
 );
 
+ALTER TABLE users 
+  ADD COLUMN portfolio_value NUMERIC;
+
+ALTER TABLE users 
+  ADD COLUMN value_date DATE;
+
 
 
