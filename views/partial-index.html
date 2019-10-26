@@ -1,27 +1,53 @@
 <head>
-    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/indexStyles.css">
 </head>
+<div class="index-wrapper">
+    <div class="header-background-overlay"></div>
+    <div class="background-overlay">
 
-<div class="yellow_background"></div>
+
+        <header class="responsive-header">
+
+            <div class="logo-group">
+                <img src="images/pancakes.svg">
+                <span>Goldman Stacks</span>
+            </div>
+
+        </header>
+
+        <h1>Get Started Adding to Your Portfolio!</h1>
+        <img class="watermark-img" src="images/pancakes.svg">
+
+        <div class="login-signup-ctn">
 
 
+            <div class="login-ctn small-card">
+                <h2>Login</h2>
+                <form action="/users/login" method="POST">
 
-<nav>
-    <div class="login-ctn">
+                    <label for="email_address"> Email Address</label>
+                    <input type="text" aria-placeholder="Email Address" name="email_address">
 
-        <form action="/users/login" method="POST">
-            <label> Email Address
-                <input type="text" aria-placeholder="Email Address" name="email_address">
-            </label>
-            <label> Password
-                <input type="password" aria-placeholder="Password" name="password">
-            </label>
+                    <label for="password"> Password</label>
+                    <input type="password" aria-placeholder="Password" name="password">
 
-            <button type="submit">Login</button>
-        </form>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+
+            <div class="description-ctn small-card">
+                <p>Our stock simulator allows you to have a close to real world experience buying and selling stocks. Find Companys, read up on trending news and even see where you stand on our leaderboards! </p>
+            </div>
+
+            <div class="signup-ctn small-card">
+
+                <h2>Don't have an account? Click Here to Sign Up!!</h2>
+                <a href="users/signup"><button>Sign up!</button></a>
+
+            </div>
+
+
+        </div>
 
     </div>
-</nav>
-
-<h1>Goldman Sacks</h1>
-<h2>Don't have an account <span> <a href="./users/signup"> Click Here </a></span>to sign up!!</h2>
