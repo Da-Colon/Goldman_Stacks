@@ -6,7 +6,7 @@ router.get("/", async(req, res, next) => {
 
     res.render("template", {
         locals: {
-            title: "",
+            title: ""
 
         },
         partials: {

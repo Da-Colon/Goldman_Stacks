@@ -41,11 +41,11 @@ router.post("/signup", async(req, res, next) => {
 
     const user = new UserModel(first_name, last_name, email_address, hash);
 
-    const addUser = await user.addNewUser()
+    const addUser = await user.addNewUser();
     console.log("Was User Added? ", addUser.id);
     if (addUser) {
         stacksDB.giveNewUserInitialCash(addUser.id);
-        res.status(200).redirect("/users/login");
+        res.status(200).redirect("/");
     } else {
         res.sendStatus(500);
     }
@@ -68,7 +68,7 @@ router.post("/login", async(req, res, next) => {
         req.session.last_name = last_name;
         req.session.id = id;
 
-        res.status(200).redirect("/");
+        res.status(200).redirect("/dashboard");
 
     } else {
         res.sendStatus(401);

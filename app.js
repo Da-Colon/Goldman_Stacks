@@ -15,6 +15,7 @@ require("dotenv").config();
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const dashboardRouter = require("./routes/dashboard")
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use(session({
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/dashboard", dashboardRouter);
 
 
 module.exports = app;
