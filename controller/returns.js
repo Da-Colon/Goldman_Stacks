@@ -9,7 +9,7 @@ async function getPortfolioValues(userID) {
 
   // Extracts the number of shares
   let allPositionQuantities = {};
-   allPositions.forEach((item) => {
+    allPositions.forEach((item) => {
     allPositionQuantities[item.ticker] = item.num_shares;
   })
 
@@ -71,8 +71,43 @@ async function getPortfolioValues(userID) {
 
 }
 
+// Returns the %change (as a decimal) for each of the 4 indices on the dashboard
+async function getIndexValues() {
+  // SPY for S&P 500
+  // EFA for MSCI EAFE
+  // IWB for Russell 1000
+  // IWM for Russell 2000
+
+  let indexInfo = {
+    SP500: {
+      percentChange: 0
+    },
+    Russell1000: {
+      percentChange: 0
+    },
+    Russell2000: {
+      percentChange: 0
+    },
+    MSCIEAFE: {
+      percentChange: 0
+    },
+  }
+
+  const allQuotes = await API.getMultipleCompanyQuotes(['SPY', 'EFA', 'IWB', 'IWM']);
+
+  indexInfo.SP500.percentChange = allQuotes.SPY.quote.changePercent;
+  indexInfo.Russell1000.percentChange = allQuotes.IWB.quote.changePercent;
+  indexInfo.Russell2000.percentChange = allQuotes.IWM.quote.changePercent;
+  indexInfo.MSCIEAFE.percentChange = allQuotes.EFA.quote.changePercent;
+
+  return allQuotes;
+}
+
+// getIndexValues();
+
 // getPortfolioValues(1);
 
 module.exports = {
-  getPortfolioValues
+  getPortfolioValues,
+  getIndexValues
 }
