@@ -69,7 +69,7 @@
             <div class="center-column">
 
                 <div class="page-title">
-                    <h1 class="your-portfolio">Your Portfolio</h1>
+                    <h1 class="your-portfolio">${userFirstName} ${userLastName[0]}'s Portfolio</h1>
                     <h1><span class="up-arrow">&uarr;</span> $116,404</h1>
                 </div>
                 <hr>
@@ -175,11 +175,17 @@
 
                 <div class="trending-news small-card">
                     <h2 class="small-card-title">In the News</h2>
+
+                    <hr> ${newsData.map(info => `
                     <hr>
-                    <p>Boeing announces revisions in newest...</p>
+                    <p>${info.description}</p>
+
+                    `).join(' ')}
+
+                    <!-- <p>Boeing announces revisions in newest...</p>
                     <p>Libra faces new headwinds as the Senate...</p>
                     <p>Top executives at Merck question see new...</p>
-                    <p>Blue Apron sees new scrutiny for worst IPO...</p>
+                    <p>Blue Apron sees new scrutiny for worst IPO...</p> -->
                 </div>
 
             </div>

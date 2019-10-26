@@ -2,106 +2,105 @@
 const axios = require('axios');
 
 
-  // SANDBOX URL
-  // https://sandbox.iexapis.com/...
+// SANDBOX URL
+// https://sandbox.iexapis.com/...
 
-  // PRODUCTION URL
-  // https://cloud.iexapis.com/...
-  
-  // PRODUCTION PUBLIC KEY = pk_fb66ab77a4b6406a838e0db01df0416c
-  // SANDBOX PUBLIC KEY = Tpk_8670b146a6084c8b9bba64c09c443eed
+// PRODUCTION URL
+// https://cloud.iexapis.com/...
+
+// PRODUCTION PUBLIC KEY = pk_fb66ab77a4b6406a838e0db01df0416c
+// SANDBOX PUBLIC KEY = Tpk_8670b146a6084c8b9bba64c09c443eed
 
 
 // Returns the stock price AND key financial stats for a single company
 const getStockPrice = async(symbol) => {
-  const {data} = await axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=pk_fb66ab77a4b6406a838e0db01df0416c`)
-  console.log(data)
-  
-  // Includes a lot of good stats. We should be able to just use this for the company page;
+    const { data } = await axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=pk_fb66ab77a4b6406a838e0db01df0416c`)
+    console.log(data)
+
+    // Includes a lot of good stats. We should be able to just use this for the company page;
 
 };
 
 // Returns the latest 5 articles for a single company
 const getSingleCompanyNews = async(symbol) => {
 
-  const {data} = await axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/news/last/5?token=pk_fb66ab77a4b6406a838e0db01df0416c`)
-  console.log(data)
+    const { data } = await axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/news/last/5?token=pk_fb66ab77a4b6406a838e0db01df0416c`)
+    console.log(data)
 
 }
 
 // Returns the latest article for each ticker in the array
 const getMultipleCompanyNews = async(tickerArray) => {
 
-  let tickerString = '';
-  const arrLength = tickerArray.length;
+    let tickerString = '';
+    const arrLength = tickerArray.length;
 
-  // Builds the string of ticker symbols
-  tickerArray.forEach((ticker) => {
-    if (ticker !== 'USERCASH') {
-      tickerString += ticker;
-      !(tickerArray.indexOf(ticker) === arrLength - 1) && (tickerString += ',');
+    // Builds the string of ticker symbols
+    tickerArray.forEach((ticker) => {
+            if (ticker !== 'USERCASH') {
+                tickerString += ticker;
+                !(tickerArray.indexOf(ticker) === arrLength - 1) && (tickerString += ',');
+            }
+        })
+        // console.log(tickerString);
+
+    // Fetches the news for all symbols passed in
+    try {
+        const { data } = await axios.get(`https://cloud.iexapis.com/stable/stock/market/batch?symbols=${tickerString}&types=news&last=1&token=pk_fb66ab77a4b6406a838e0db01df0416c`);
+        // console.log(data);
+        // console.log(data.AAPL)
+        return data;
+    } catch (err) {
+        console.log('Error fetching news for multiple tickers.');
+        console.log(err);
+        return;
     }
-  })
-  // console.log(tickerString);
-
-  // Fetches the news for all symbols passed in
-  try {
-    const {data} = await axios.get(`https://cloud.iexapis.com/stable/stock/market/batch?symbols=${tickerString}&types=news&last=1&token=pk_fb66ab77a4b6406a838e0db01df0416c`);
-    // console.log(data);
-    // console.log(data.AAPL)
-    return data;
-  } catch (err) {
-    console.log('Error fetching news for multiple tickers.');
-    console.log(err);
-    return;
-  }
 
 }
 
 // Returns the current stock price for each ticker in the array
 const getMultipleCompanyQuotes = async(tickerArray) => {
 
-  let tickerString = '';
-  const arrLength = tickerArray.length;
+    let tickerString = '';
+    const arrLength = tickerArray.length;
 
-  // Builds the string of ticker symbols
-  tickerArray.forEach((ticker) => {
-    if (ticker !== 'USERCASH') {
-      tickerString += ticker;
-      !(tickerArray.indexOf(ticker) === arrLength - 1) && (tickerString += ',');
+    // Builds the string of ticker symbols
+    tickerArray.forEach((ticker) => {
+            if (ticker !== 'USERCASH') {
+                tickerString += ticker;
+                !(tickerArray.indexOf(ticker) === arrLength - 1) && (tickerString += ',');
+            }
+        })
+        // console.log(tickerString);
+
+    // Fetches the news for all symbols passed in
+    try {
+        const { data } = await axios.get(`https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${tickerString}&types=quote&token=Tpk_8670b146a6084c8b9bba64c09c443eed`);
+        // console.log(data);
+        // console.log(data.AAPL)
+        return data;
+    } catch (err) {
+        console.log('Error fetching quotes for multiple tickers.');
+        console.log(err);
+        return;
     }
-  })
-  // console.log(tickerString);
-
-  // Fetches the news for all symbols passed in
-  try {
-    const {data} = await axios.get(`https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${tickerString}&types=quote&token=Tpk_8670b146a6084c8b9bba64c09c443eed`);
-    // console.log(data);
-    // console.log(data.AAPL)
-    return data;
-  } catch (err) {
-    console.log('Error fetching quotes for multiple tickers.');
-    console.log(err);
-    return;
-  }
 
 }
 
 // Returns the designated number of top business articles
 const getTopBusinessNews = async(numOfArticles) => {
 
-  const {data} = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${numOfArticles}&apiKey=335ef27328fb481aa97916cb3c338206`)
-
-  console.log(data);
+    const { data } = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${numOfArticles}&apiKey=335ef27328fb481aa97916cb3c338206`)
+    return { data };
 
 }
 
 module.exports = {
-  getStockPrice,
-  getSingleCompanyNews,
-  getMultipleCompanyNews,
-  getTopBusinessNews,
-  getMultipleCompanyQuotes
+    getStockPrice,
+    getSingleCompanyNews,
+    getMultipleCompanyNews,
+    getTopBusinessNews,
+    getMultipleCompanyQuotes
 }
 
 // getStockPrice('AAPL');
