@@ -19,7 +19,7 @@ class stacksDB {
   //   num_shares: '95292',
   //   cost_basis: '1' } ]
 
-  
+
   // Buys the specified amount of stock and updates cash, records the transaction
   static async buyStock(userID, ticker, quantity, price, company_name) {
     let response;
@@ -269,7 +269,7 @@ class stacksDB {
 
 // stacksDB.buyStock(1, 'AMZN', 4, 150, 'Amazon');
 // stacksDB.sellStock(1, 'AMZN', 4, 150);
-stacksDB.giveNewUserInitialCash(2);
+// stacksDB.giveNewUserInitialCash(2);
 
 
 module.exports = stacksDB;
