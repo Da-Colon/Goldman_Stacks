@@ -37,19 +37,50 @@ const getMultipleCompanyNews = async(tickerArray) => {
 
   // Builds the string of ticker symbols
   tickerArray.forEach((ticker) => {
-    tickerString += ticker;
-    !(tickerArray.indexOf(ticker) === arrLength - 1) && (tickerString += ',');
+    if (ticker !== 'USERCASH') {
+      tickerString += ticker;
+      !(tickerArray.indexOf(ticker) === arrLength - 1) && (tickerString += ',');
+    }
   })
-  console.log(tickerString);
+  // console.log(tickerString);
 
   // Fetches the news for all symbols passed in
   try {
-    const {data} = await axios.get(`https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${tickerString}&types=news&last=1&token=Tpk_8670b146a6084c8b9bba64c09c443eed`);
-    console.log(data);
-    console.log(data.AAPL)
+    const {data} = await axios.get(`https://cloud.iexapis.com/stable/stock/market/batch?symbols=${tickerString}&types=news&last=1&token=pk_fb66ab77a4b6406a838e0db01df0416c`);
+    // console.log(data);
+    // console.log(data.AAPL)
     return data;
   } catch (err) {
     console.log('Error fetching news for multiple tickers.');
+    console.log(err);
+    return;
+  }
+
+}
+
+// Returns the current stock price for each ticker in the array
+const getMultipleCompanyQuotes = async(tickerArray) => {
+
+  let tickerString = '';
+  const arrLength = tickerArray.length;
+
+  // Builds the string of ticker symbols
+  tickerArray.forEach((ticker) => {
+    if (ticker !== 'USERCASH') {
+      tickerString += ticker;
+      !(tickerArray.indexOf(ticker) === arrLength - 1) && (tickerString += ',');
+    }
+  })
+  // console.log(tickerString);
+
+  // Fetches the news for all symbols passed in
+  try {
+    const {data} = await axios.get(`https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${tickerString}&types=quote&token=Tpk_8670b146a6084c8b9bba64c09c443eed`);
+    // console.log(data);
+    // console.log(data.AAPL)
+    return data;
+  } catch (err) {
+    console.log('Error fetching quotes for multiple tickers.');
     console.log(err);
     return;
   }
@@ -69,7 +100,8 @@ module.exports = {
   getStockPrice,
   getSingleCompanyNews,
   getMultipleCompanyNews,
-  getTopBusinessNews
+  getTopBusinessNews,
+  getMultipleCompanyQuotes
 }
 
 // getStockPrice('AAPL');
@@ -79,6 +111,8 @@ module.exports = {
 // getMultipleCompanyNews(['AAPL', 'GOOG']);
 
 // getTopBusinessNews(2);
+
+// getMultipleCompanyQuotes(['AAPL', 'GOOG', 'FB']);
 
 
 
