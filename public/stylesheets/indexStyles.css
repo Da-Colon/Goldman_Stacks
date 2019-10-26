@@ -1,0 +1,240 @@
+html {
+    box-sizing: border-box;
+    font-size: 18px;
+    font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    color: #333;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(50deg, rgb(202, 243, 252), rgb(243, 224, 255), rgb(202, 243, 252));
+    z-index: -4;
+}
+
+
+/* Index Page Wrapper */
+
+.index-wrapper {
+    height: 100vh;
+}
+
+.background-overlay {
+    width: 100%;
+    height: 100%;
+    padding: 0 50px;
+    /* background-color: rgba(255, 255, 255, 1); */
+}
+
+h1,
+h2,
+h3,
+p {
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    font-size: 2.2rem;
+    text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.15), 0px 0px 15px rgba(0, 0, 0, 0.06);
+    font-weight: 400;
+    color: #222;
+}
+
+h2 {
+    font-size: 1.5rem;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), 0px 1px 15px rgba(0, 0, 0, 0.05);
+}
+
+h3 {
+    font-weight: 400;
+    padding: 0.3rem;
+}
+
+p {
+    padding: 0.4rem;
+    /* text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), 
+0px 1px 15px rgba(0, 0, 0, 0.05); */
+    font-weight: 400;
+}
+
+hr {
+    background-image: linear-gradient(to right, rgba(105, 103, 89, 0) 0%, rgba(105, 103, 89, 0.6) 35%, rgba(105, 103, 89, 0.6) 65%, rgba(105, 103, 89, 0) 100%);
+    border: none;
+    height: 1px;
+    min-height: 1px;
+}
+
+.mobile-only {
+    display: none;
+}
+
+
+/*
+HEADER
+*/
+
+header {
+    width: 100%;
+    height: 60px;
+    margin-bottom: 70px;
+    padding-top: 10px;
+    /* margin-left: -50px;
+margin-right: -50px; */
+    /* padding-left: 50px;
+padding-right: 50px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    color: #fff;
+    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.18), 0px 0px 15px rgba(0, 0, 0, 0.05);
+}
+
+.header-background-overlay {
+    position: fixed;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    z-index: -5;
+}
+
+.logo-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: auto;
+}
+
+.logo-group>span {
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding-left: 5px;
+}
+
+.logo-group img {
+    width: 50px;
+}
+
+header>img {
+    width: 50px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.small-card {
+    background-color: rgba(255, 255, 255, .6);
+    border-radius: 20px;
+    margin: -10px -15px;
+    padding: 10px 15px;
+    margin-bottom: 40px;
+    z-index: 3;
+    box-shadow: 0px 20px 40px 20px rgba(101, 75, 109, 0.1), 0px 10px 10px 5px rgba(101, 75, 109, 0.5);
+}
+
+.login-signup-ctn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.login-ctn,
+.signup-ctn,
+.description-ctn {
+    margin: 20px;
+    padding: 50px;
+    height: 300px;
+}
+
+.description-ctn {
+    width: 350px;
+    min-width: 200px;
+}
+
+.login-ctn {
+    padding: 100px;
+    padding-top: 50px;
+}
+
+.login-ctn h2 {
+    text-align: center;
+}
+
+.signup-ctn {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 200px;
+    max-width: 350px;
+    padding: 20px;
+}
+
+.login-ctn form {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+}
+
+button {
+    align-self: center;
+    border: 2px solid #aaa;
+    padding: 3px 15px;
+    font-weight: 700;
+    color: #444;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2), 0px 0px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.11) inset;
+    cursor: pointer;
+    transition: 100ms ease all;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.watermark-img {
+    position: absolute;
+    width: 400px;
+    padding: 8px;
+    left: 50%;
+    margin-left: -200px;
+    top: 50%;
+    margin-top: -200px;
+    /* z-index: -1; */
+    opacity: .3;
+}
+
+@media only screen and (max-width: 1100px) {
+    header {
+        margin-bottom: 30px;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 870px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    html {
+        font-size: 14px;
+    }
+}
