@@ -2,7 +2,9 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
 const UserModel = require("../models/users");
+const stacksDB = require('../models/stacksDB');
 
+// Displaying LOGIN page
 router.get("/login", async(req, res, next) => {
     res.render("template", {
         locals: {
@@ -16,6 +18,7 @@ router.get("/login", async(req, res, next) => {
     });
 });
 
+// Displaying SIGNUP page
 router.get("/signup", async(req, res, next) => {
     res.render("template", {
         locals: {
@@ -28,6 +31,8 @@ router.get("/signup", async(req, res, next) => {
     });
 });
 
+
+// SIGNUP post request - creating new user after signup
 router.post("/signup", async(req, res, next) => {
     const { first_name, last_name, email_address } = req.body;
 
@@ -36,15 +41,17 @@ router.post("/signup", async(req, res, next) => {
 
     const user = new UserModel(first_name, last_name, email_address, hash);
 
-    const addUser = await user.save()
+    const addUser = await user.addNewUser()
     console.log("Was User Added? ", addUser.id);
     if (addUser) {
+        stacksDB.giveNewUserInitialCash(addUser.id);
         res.status(200).redirect("/users/login");
     } else {
-        res.status(500);
+        res.sendStatus(500);
     }
 });
 
+// LOGIN post request - verify password, setup logged in session
 router.post("/login", async(req, res, next) => {
     const { email_address, password } = req.body;
 
@@ -64,7 +71,7 @@ router.post("/login", async(req, res, next) => {
         res.status(200).redirect("/");
 
     } else {
-        res.status(401);
+        res.sendStatus(401);
     }
 });
 

@@ -1,6 +1,6 @@
 const db = require('./conn');
 
-class User {
+class stacksDB {
   constructor() {
   };
 
@@ -19,6 +19,8 @@ class User {
   //   num_shares: '95292',
   //   cost_basis: '1' } ]
 
+  
+  // Buys the specified amount of stock and updates cash, records the transaction
   static async buyStock(userID, ticker, quantity, price, company_name) {
     let response;
     let purchasePrice = quantity * price;
@@ -71,7 +73,7 @@ class User {
     if (cash.value < purchasePrice) {
       console.log(`Not enough cash to purchase the desired quantity of ${ticker}.`);
       db.$pool.end();
-      return "Insufficient cash";
+      return;
     }
 
     // Decrease cash by the purchase cost
@@ -123,9 +125,7 @@ class User {
     db.$pool.end(); return;
   };
 
-
-
-
+  // Sells the specified amount of stock and updates cash, records the transaction
   static async sellStock(userID, ticker, quantity, price) {
 
     let response;
@@ -179,7 +179,7 @@ class User {
     if (stock.shares < quantity) {
       console.log(`ERROR: Requested to sell ${quantity} shares of ${ticker} but user only has ${stock.shares} shares.`);
       db.$pool.end();
-      return "Insufficient shares";
+      return;
     }
 
     // Increase cash by the sale price
@@ -194,11 +194,12 @@ class User {
       db.$pool.end(); return;
     }
 
+    let updatePositions;
     // If we're SELLING ALL of the shares, remove the position entirely
     if (stock.shares === quantity) {
       // Remove the ticker from the positions
       try {
-        updateCash = db.result(`DELETE FROM positions WHERE id = $1;`, [stock.positionID]);
+        updatePositions = db.result(`DELETE FROM positions WHERE id = $1;`, [stock.positionID]);
       } catch(err) {
         console.log(`ERROR: Issue when removing the entire position when selling ${ticker} with the User.sellStock method.`);
         db.$pool.end(); return;
@@ -207,7 +208,7 @@ class User {
       // If we're selling LESS THAN ALL of the shares, decrease the basis (average cost) and remove the shares
       let newCostBasis = stock.basis - (stock.basis / stock.shares) * quantity;
       try {
-        updateCash = db.result(`UPDATE positions SET num_shares = $1, cost_basis = $2 WHERE id = $3;`, [quantity, newCostBasis, stock.positionID]);
+        updatePositions = db.result(`UPDATE positions SET num_shares = $1, cost_basis = $2 WHERE id = $3;`, [quantity, newCostBasis, stock.positionID]);
       } catch(err) {
         console.log(`ERROR: Issue when removing the sold portion of the position when selling ${ticker} with the User.sellStock method.`);
         db.$pool.end(); return;
@@ -228,11 +229,47 @@ class User {
     db.$pool.end(); return;
   }
 
+  // Gives a new user an initial cash amount if they didn't already have cash.
+  static async giveNewUserInitialCash(userID) {
+
+    let initialCashValue = 100000;
+
+    let response;
+    // Grab the current cash for the user
+    try {
+      response = await db.any(`SELECT * FROM positions WHERE user_id = $1 AND ticker = 'USERCASH';`, [userID]);
+    } catch(err) {
+      console.log(`ERROR: Initial cash position query from stacksDB.giveNewUserInitialCash method failed for userID ${userID}.`);
+      console.log(err);
+      db.$pool.end(); return;
+    }
+
+    // Ensure the user doesn't already have cash
+    if (response.length !== 0) {
+      console.log(`ERROR: UserID ${userID} already had cash, but it was expected that initial cash would be 0. From stacksDB.giveNewUserInitialCash method.`);
+      db.$pool.end(); return;
+    }
+
+    let insertCash;
+    // Insert the cash position for the new user
+    try {
+      insertCash = await db.result(`INSERT INTO positions (user_id, ticker, company_name, num_shares, cost_basis) VALUES ($1, $2, $3, $4, $5);`, [userID, 'USERCASH', 'Cash', initialCashValue, 1]);
+    } catch(err) {
+      console.log(`ERROR: Issue when posting cash for new user ${userID} with the stacksDB.giveNewUserInitialCash method.`);
+      db.$pool.end(); return;
+    }
+
+    db.$pool.end(); return;
+  }
+
+
 
 
 }
 
-// User.buyStock(1, 'AMZN', 4, 150, 'Amazon');
-// User.sellStock(1, 'AMZN', 4, 150);
+// stacksDB.buyStock(1, 'AMZN', 4, 150, 'Amazon');
+// stacksDB.sellStock(1, 'AMZN', 4, 150);
+stacksDB.giveNewUserInitialCash(2);
 
-module.exports = User;
+
+module.exports = stacksDB;
