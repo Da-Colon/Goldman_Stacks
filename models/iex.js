@@ -95,15 +95,36 @@ const getTopBusinessNews = async(numOfArticles) => {
 
 }
 
+// Returns the PERCENT CHANGE for the 4 most active companies
+const getTrendingCompanies = async() => {
+
+    let trendingCompanies = {}
+
+    const { data } = await axios.get(`https://sandbox.iexapis.com/stable/stock/market/list/mostactive?listLimit=4&token=Tpk_8670b146a6084c8b9bba64c09c443eed`)
+    console.log(data)
+
+    data.forEach(item => {
+        trendingCompanies[item.symbol] = item.changePercent;
+    })
+
+    console.log(trendingCompanies);
+
+    return trendingCompanies;
+
+}
+
+
+
 module.exports = {
     getStockPrice,
     getSingleCompanyNews,
     getMultipleCompanyNews,
     getTopBusinessNews,
-    getMultipleCompanyQuotes
+    getMultipleCompanyQuotes,
+    getTrendingCompanies
 }
 
-// getStockPrice('AAPL');
+// getStockPrice('IWM');
 
 // getSingleCompanyNews('FB');
 
@@ -112,6 +133,8 @@ module.exports = {
 // getTopBusinessNews(2);
 
 // getMultipleCompanyQuotes(['AAPL', 'GOOG', 'FB']);
+
+// getTrendingCompanies();
 
 
 
