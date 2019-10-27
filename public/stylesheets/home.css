@@ -284,6 +284,15 @@ CENTER COLUMN
   margin-bottom: 30px;
 }
 
+.large-card a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.large-card a:hover {
+  text-decoration: underline;
+}
+
 .position-row {
   display: grid;
   grid-template-columns: 4fr 5fr 5fr 5fr;
