@@ -26,33 +26,35 @@
                 <div class="indices small-card ticker">
                     <h2 class="small-card-title">Market</h2>
 
-                    <hr> ${topEarnerData.map(info => `
+                    <hr>
+
+
+
                     <div class="single-item">
-                        <p>${info.symbol}</p>
+                        <p>${market.SPY.quote.symbol}</p>
                         <p class="small-ticker-value">
-                            <span class=${info.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${info.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${Math.floor(info.changePercent * 100)}%</p>
+                            <span class=${market.SPY.quote.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${market.SPY.quote.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${( market.SPY.quote.changePercent * 100).toFixed(1)}%</p>
+
                     </div>
-                    `).join(' ')}
+                    <div class="single-item">
+                        <p>${market.EFA.quote.symbol}</p>
+                        <p class="small-ticker-value">
+                            <span class=${market.EFA.quote.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${market.EFA.quote.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${( market.EFA.quote.changePercent * 100).toFixed(1)}%</p>
+
+                    </div>
+                    <div class="single-item">
+                        <p>${market.IWB.quote.symbol}</p>
+                        <p class="small-ticker-value">
+                            <span class=${market.IWB.quote.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${market.IWB.quote.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${( market.IWB.quote.changePercent * 100).toFixed(1)}%</p>
+
+                    </div>
+                    <div class="single-item">
+                        <p>${market.IWM.quote.symbol}</p>
+                        <p class="small-ticker-value">
+                            <span class=${market.IWM.quote.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${market.IWM.quote.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${( market.IWM.quote.changePercent * 100).toFixed(1)}%</p>
+
+                    </div>
                 </div>
-
-
-                <!-- <div class="single-item">
-                        <p>S&P 500</p>
-                        <p class="small-ticker-value"><span class="up-arrow">&uarr;</span> 1.1%</p>
-                    </div>
-                    <div class="single-item">
-                        <p>Russell 1000</p>
-                        <p class="small-ticker-value"><span class="up-arrow">&uarr;</span> 1.0%</p>
-                    </div>
-                    <div class="single-item">
-                        <p>Russell 2000</p>
-                        <p class="small-ticker-value"><span class="up-arrow">&uarr;</span> 1.6%</p>
-                    </div>
-                    <div class="single-item">
-                        <p>MSCI EAFE</p>
-                        <p class="small-ticker-value"><span class="up-arrow">&uarr;</span> 0.4%</p>
-                    </div>
-                </div> -->
 
                 <div class="trending-stocks small-card ticker">
                     <h2 class="small-card-title">Trending</h2>
@@ -73,7 +75,7 @@
 
                 <div class="page-title">
                     <h1 class="your-portfolio">Your Portfolio</h1>
-                    <h1><span class=${(portVals.totalPortfolio.valueChange >= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
+                    <h1><span class=${(portVals.totalPortfolio.valueChange>= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
                     </span> ${portVals.totalPortfolio.totalValue}</h1>
                 </div>
                 <hr>
@@ -85,9 +87,9 @@
                     <div class="position-title position-row">
                         <h2>Today</h2>
                         <div class="hide-on-mobile"></div>
-                        <h2 class="up-down-percent"><span class=${(portVals.totalPortfolio.valueChange >= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
+                        <h2 class="up-down-percent"><span class=${(portVals.totalPortfolio.valueChange>= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
                           </span> ${portVals.totalPortfolio.valueChangePercent}</h2>
-                        <h2 class="position-amount"><span class=${(portVals.totalPortfolio.valueChange >= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
+                        <h2 class="position-amount"><span class=${(portVals.totalPortfolio.valueChange>= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
                           </span> ${portVals.totalPortfolio.valueChangeStr}</h2>
                     </div>
                     <hr>
@@ -100,16 +102,16 @@
                     </div>
 
                     ${portVals.positions.map(item => `
-                      <div class="position-row">
-                          <h2>${item.symbol}</h2>
-                          <div class="buy-sell">
-                              <div class="buy-button">Buy</div>
-                              <div class="sell-button">Sell</div>
-                          </div>
-                          <h2 class="up-down-percent"><span class=${(item.valueChange >= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
+                    <div class="position-row">
+                        <h2>${item.symbol}</h2>
+                        <div class="buy-sell">
+                            <div class="buy-button">Buy</div>
+                            <div class="sell-button">Sell</div>
+                        </div>
+                        <h2 class="up-down-percent"><span class=${(item.valueChange>= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
                             </span> ${item.changePercent}</h2>
-                          <h2 class="position-amount">${item.value}</h2>
-                      </div>
+                        <h2 class="position-amount">${item.value}</h2>
+                    </div>
                     `).join('')}
 
                 </div>
@@ -117,11 +119,11 @@
                 <div class="large-card">
 
                     <h2>News For You</h2>
-                    <hr>
-
-                    ${portVals.news.map(item => `
-                      <a href="${item.url}" target="_blank"><h3>${item.symbol}: &nbsp;${item.headline}</h3></a>
-                      `).join('')}
+                    <hr> ${portVals.news.map(item => `
+                    <a href="${item.url}" target="_blank">
+                        <h3>${item.symbol}: &nbsp;${item.headline}</h3>
+                    </a>
+                    `).join('')}
 
                 </div>
 
@@ -131,22 +133,22 @@
 
                 <div class="friend-leaderboard small-card ticker">
                     <h2 class="small-card-title">Leaderboard</h2>
-                    <hr>
-                    ${leaders.map(leader => `
-                      <div class="single-item">
+                    <hr> ${leaders.map(leader => `
+                    <div class="single-item">
                         <p>${leader.name}</p>
                         <p class="small-ticker-value">
-                          <span class=${(leader.portfolio_growth >= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
+                            <span class=${(leader.portfolio_growth>= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
                           </span> ${Math.round(leader.portfolio_growth * 1000) / 10}%</p>
-                      </div>
-                      `).join('')}
+                    </div>
+                    `).join('')}
                 </div>
 
                 <div class="trending-news small-card">
                     <h2 class="small-card-title">In the News</h2>
-                    <hr> 
-                    ${newsData.map(info => `
-                    <a href="${info.url}" target="_blank"><p>${info.title}</p></a>
+                    <hr> ${newsData.map(info => `
+                    <a href="${info.url}" target="_blank">
+                        <p>${info.title}</p>
+                    </a>
                     `).join('')}
 
                 </div>
