@@ -1,11 +1,12 @@
 const stacksDB = require('../models/stacksDB');
 const API = require('../models/iex');
+const numeral = require('numeral');
 
 // Grabs all information needed for the Main Card on the home page
 async function getPortfolioValues(userID) {
 
   // Fetches all positions
-  let allPositions = await stacksDB.returnAllPositionsInPortfolio(userID);
+  let allPositions = await stacksDB.returnAllPositionsInPortfolioNoClose(userID);
 
   // Extracts the number of shares
   let allPositionQuantities = {};
@@ -19,7 +20,15 @@ async function getPortfolioValues(userID) {
   })
 
   // Gets the current prices of all tickers
-  let allQuotes = await API.getMultipleCompanyQuotes(tickerArray);
+  let allQuotes, allNews;
+  if (allPositions.length > 1) {
+    allQuotes = await API.getMultipleCompanyQuotes(tickerArray);
+    allNews = await API.getMultipleCompanyNews(tickerArray);
+  } else {
+    allQuotes = {};
+    allNews = {};
+  }
+
 
   // Creates the values object we're going to return
   let portfolioValues = { 
@@ -27,16 +36,16 @@ async function getPortfolioValues(userID) {
     totalPortfolio: { 
       valueChange: 0 
     }, 
-    positions: {} 
+    positions: [],
+    news: []
   };
 
   // Adds cash to the values object
-  portfolioValues.cash = Number(allPositionQuantities['USERCASH']);
+  portfolioValues.cash = numeral(Number(allPositionQuantities['USERCASH'])).format('$0,0');
 
   // Starts adding up the total portfolio value
   let portfolioTotalValue = 0;
-  portfolioTotalValue += portfolioValues.cash;
-
+  portfolioTotalValue += Number(allPositionQuantities['USERCASH']);
   
 
   // Adds all position values to the object we're returning
@@ -48,24 +57,34 @@ async function getPortfolioValues(userID) {
     portfolioTotalValue += currentValue;
 
     // Adds the properties for each stock to the portfolioValues object
-    portfolioValues.positions[key] = {};
-    portfolioValues.positions[key].price = currentPrice;
-    portfolioValues.positions[key].value = currentValue;
-    portfolioValues.positions[key].valueChange = allQuotes[key].quote.change * allPositionQuantities[key];
-    portfolioValues.positions[key].change = allQuotes[key].quote.change;
-    portfolioValues.positions[key].changePercent = allQuotes[key].quote.changePercent;
-    portfolioValues.positions[key].numShares = Number(allPositionQuantities[key]);
+    let tempObj = {};
+    tempObj.symbol = key;
+    tempObj.price = currentPrice;
+    tempObj.value = numeral(currentValue).format('$0,0');
+    tempObj.valueChange = allQuotes[key].quote.change * allPositionQuantities[key];
+    tempObj.change = allQuotes[key].quote.change;
+    tempObj.changePercent = numeral(allQuotes[key].quote.changePercent).format('0.0%');
+    tempObj.numShares = Number(allPositionQuantities[key]);
+    portfolioValues.positions.push(tempObj);
 
     // Increments the total value change of the portfolio
-    portfolioValues.totalPortfolio.valueChange += portfolioValues.positions[key].valueChange;
+    portfolioValues.totalPortfolio.valueChange += tempObj.valueChange;
 
   }
 
+  // Parses the relevant news articles
+  for (let ticker in allNews) {
+    let tempObj = {};
+    tempObj.symbol = ticker;
+    tempObj.headline = allNews[ticker].news[0].headline.replace(/^(.{100}[^\s]*).*/, "$1") + "...";
+    tempObj.url = allNews[ticker].news[0].url;
+    portfolioValues.news.push(tempObj);
+  }
+  
   // Adds the total portfolio value and calculates the % change
-  portfolioValues.totalPortfolio.totalValue = portfolioTotalValue;
-  portfolioValues.totalPortfolio.valueChangePercent = portfolioValues.totalPortfolio.valueChange / portfolioTotalValue;
-
-  // console.log(portfolioValues);
+  portfolioValues.totalPortfolio.totalValue = numeral(portfolioTotalValue).format('$0,0');
+  portfolioValues.totalPortfolio.valueChangeStr = numeral(portfolioValues.totalPortfolio.valueChange).format('$0,0');
+  portfolioValues.totalPortfolio.valueChangePercent = numeral(portfolioValues.totalPortfolio.valueChange / portfolioTotalValue).format('0.0%');
 
   return (portfolioValues);
 
@@ -105,7 +124,7 @@ async function getIndexValues() {
 
 // getIndexValues();
 
-// getPortfolioValues(1);
+getPortfolioValues(1);
 
 module.exports = {
   getPortfolioValues,

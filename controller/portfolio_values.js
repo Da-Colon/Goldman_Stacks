@@ -35,7 +35,6 @@ async function updatePortfolioValuesIfNeeded() {
   // If no need to update, exit the function
   if (!needToUpdate) {
     console.log("All portfolio values are up to date");
-    db.$pool.end();
     return;
   }
 
@@ -139,5 +138,5 @@ module.exports = {
   getLeaderboardUsers
 }
 
-// updatePortfolioValuesIfNeeded();
+updatePortfolioValuesIfNeeded();
 // getLeaderboardUsers(1);
