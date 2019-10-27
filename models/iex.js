@@ -102,14 +102,14 @@ const getTrendingCompanies = async() => {
 
     const { data } = await axios.get(`https://sandbox.iexapis.com/stable/stock/market/list/mostactive?listLimit=4&token=Tpk_8670b146a6084c8b9bba64c09c443eed`)
     console.log(data)
+    return { data };
+    // data.forEach(item => {
+    //     trendingCompanies[item.symbol] = item.changePercent;
+    // })
 
-    data.forEach(item => {
-        trendingCompanies[item.symbol] = item.changePercent;
-    })
+    // console.log(trendingCompanies);
 
-    console.log(trendingCompanies);
-
-    return trendingCompanies;
+    // return trendingCompanies;
 
 }
 

@@ -8,15 +8,20 @@ router.get("/", async(req, res, next) => {
     const trendingNews = await iex.getTopBusinessNews(4);
     const allNews = await trendingNews.data;
 
-    console.log("Whats this?", trendingNews)
-    console.log("Whats this?", allNews)
+    const trendingCompanies = await iex.getTrendingCompanies();
+    const allCompanies = await trendingCompanies.data;
+
+    console.log("TRENDING", allCompanies)
+
+
     res.render("template", {
         locals: {
             title: "",
             isLoggedIn: req.session.is_logged_in,
             userFirstName: req.session.first_name,
             userLastName: req.session.last_name,
-            newsData: allNews.articles
+            newsData: allNews.articles,
+            trendingData: await allCompanies
 
         },
         partials: {

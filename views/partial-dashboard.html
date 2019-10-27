@@ -45,23 +45,15 @@
 
                 <div class="trending-stocks small-card ticker">
                     <h2 class="small-card-title">Trending</h2>
-                    <hr>
+
+                    <hr> ${trendingData.map(info => `
+
                     <div class="single-item">
-                        <p>TSLA</p>
-                        <p class="small-ticker-value"><span class="up-arrow">&uarr;</span> 6.7%</p>
+                        <p>${info.symbol}</p>
+                        <p class="small-ticker-value">
+                            <span class=${info.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${info.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${info.changePercent}</p>
                     </div>
-                    <div class="single-item">
-                        <p>GOOGL</p>
-                        <p class="small-ticker-value"><span class="up-arrow">&uarr;</span> 4.3%</p>
-                    </div>
-                    <div class="single-item">
-                        <p>TGT</p>
-                        <p class="small-ticker-value"><span class="down-arrow">&darr;</span> 7.7%</p>
-                    </div>
-                    <div class="single-item">
-                        <p>M</p>
-                        <p class="small-ticker-value"><span class="down-arrow">&darr;</span> 9.4%</p>
-                    </div>
+                    `).join(' ')}
                 </div>
 
             </div>
@@ -182,10 +174,6 @@
 
                     `).join(' ')}
 
-                    <!-- <p>Boeing announces revisions in newest...</p>
-                    <p>Libra faces new headwinds as the Senate...</p>
-                    <p>Top executives at Merck question see new...</p>
-                    <p>Blue Apron sees new scrutiny for worst IPO...</p> -->
                 </div>
 
             </div>
