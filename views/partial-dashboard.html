@@ -15,7 +15,7 @@
                 <span>Goldman Stacks</span>
             </div>
             <img src="images/magnifying-glass.svg">
-            <img src="images/settings.svg">
+            <a href="/users/logout"><img src="images/logout.svg"></a>
         </header>
 
         <main>
@@ -157,22 +157,14 @@
                 <div class="friend-leaderboard small-card ticker">
                     <h2 class="small-card-title">Leaderboard</h2>
                     <hr>
-                    <div class="single-item">
-                        <p>Jim P.</p>
-                        <p class="small-ticker-value"><span class="up-arrow">&uarr;</span> 14.1%</p>
-                    </div>
-                    <div class="single-item">
-                        <p>James K.</p>
-                        <p class="small-ticker-value"><span class="up-arrow">&uarr;</span> 13.8%</p>
-                    </div>
-                    <div class="single-item">
-                        <p>Kate M.</p>
-                        <p class="small-ticker-value"><span class="up-arrow">&uarr;</span> 13.4%</p>
-                    </div>
-                    <div class="single-item">
-                        <p>Sam G.</p>
-                        <p class="small-ticker-value"><span class="up-arrow">&uarr;</span> 13.2%</p>
-                    </div>
+                    ${leaders.map(leader => `
+                      <div class="single-item">
+                        <p>${leader.name}</p>
+                        <p class="small-ticker-value">
+                          <span class=${(leader.portfolio_growth >= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
+                          </span> ${Math.round(leader.portfolio_growth * 1000) / 10}%</p>
+                      </div>
+                      `).join('')}
                 </div>
 
                 <div class="trending-news small-card">
@@ -182,7 +174,7 @@
                     <hr>
                     <p>${info.title}</p>
 
-                    `).join(' ')}
+                    `).join('')}
 
                 </div>
 
