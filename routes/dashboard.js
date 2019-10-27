@@ -14,7 +14,7 @@ router.get("/", async(req, res, next) => {
     const topCompanies = await iex.getTopEarningCompanies();
     const allTopEarners = await topCompanies.data;
 
-    console.log("TRENDING", allCompanies)
+    console.log("TRENDING", allNews)
 
 
     res.render("template", {
