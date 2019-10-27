@@ -66,7 +66,7 @@ router.post("/login", async(req, res, next) => {
         req.session.is_logged_in = true;
         req.session.first_name = first_name;
         req.session.last_name = last_name;
-        req.session.id = id;
+        req.session.user_id = id;
 
         res.status(200).redirect("/dashboard");
 
