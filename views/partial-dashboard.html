@@ -144,10 +144,10 @@
                     <h2>News For You</h2>
                     <hr>
                     <h3>Apple earnings beat analysts' wildest...</h2>
-                        <h3>Ford announces new self-driving car that...</h2>
-                            <h3>Amazon's purchase of Whole Foods is looking...</h2>
-                                <h3>The class action lawsuit against Comcast...</h2>
-                                    <h3>IHG sees record growth in Q4 following the...</h2>
+                    <h3>Ford announces new self-driving car that...</h2>
+                    <h3>Amazon's purchase of Whole Foods is looking...</h2>
+                    <h3>The class action lawsuit against Comcast...</h2>
+                    <h3>IHG sees record growth in Q4 following the...</h2>
 
                 </div>
 
@@ -170,10 +170,9 @@
 
                 <div class="trending-news small-card">
                     <h2 class="small-card-title">In the News</h2>
-
-                    <hr> ${newsData.map(info => `
-                    <hr>
-                    <p>${info.title}</p>
+                    <hr> 
+                    ${newsData.map(info => `
+                    <a href="${info.url}" target="_blank"><p>${info.title}</p></a>
 
                     `).join('')}
 

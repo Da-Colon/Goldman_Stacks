@@ -223,6 +223,15 @@ CARD STYLES
   font-weight: 500;
 }
 
+.trending-news a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.trending-news a:hover {
+  text-decoration: underline;
+}
+
 .up-arrow,
 .down-arrow {
   text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1), 5px 5px 10px rgba(0, 0, 0, 0.05);
