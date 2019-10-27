@@ -98,11 +98,12 @@ const getTopBusinessNews = async(numOfArticles) => {
 // Returns the PERCENT CHANGE for the 4 most active companies
 const getTrendingCompanies = async() => {
 
-    let trendingCompanies = {}
+    // let trendingCompanies = {}
 
     const { data } = await axios.get(`https://sandbox.iexapis.com/stable/stock/market/list/mostactive?listLimit=4&token=Tpk_8670b146a6084c8b9bba64c09c443eed`)
-    console.log(data)
     return { data };
+
+
     // data.forEach(item => {
     //     trendingCompanies[item.symbol] = item.changePercent;
     // })
@@ -113,6 +114,12 @@ const getTrendingCompanies = async() => {
 
 }
 
+const getTopEarningCompanies = async() => {
+
+    const { data } = await axios.get(`https://sandbox.iexapis.com/stable/stock/market/list/gainers?listLimit=4&token=Tpk_8670b146a6084c8b9bba64c09c443eed`);
+    return { data };
+}
+
 
 
 module.exports = {
@@ -121,7 +128,8 @@ module.exports = {
     getMultipleCompanyNews,
     getTopBusinessNews,
     getMultipleCompanyQuotes,
-    getTrendingCompanies
+    getTrendingCompanies,
+    getTopEarningCompanies
 }
 
 // getStockPrice('IWM');

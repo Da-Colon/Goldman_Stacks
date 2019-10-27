@@ -11,6 +11,9 @@ router.get("/", async(req, res, next) => {
     const trendingCompanies = await iex.getTrendingCompanies();
     const allCompanies = await trendingCompanies.data;
 
+    const topCompanies = await iex.getTopEarningCompanies();
+    const allTopEarners = await topCompanies.data;
+
     console.log("TRENDING", allCompanies)
 
 
@@ -21,8 +24,8 @@ router.get("/", async(req, res, next) => {
             userFirstName: req.session.first_name,
             userLastName: req.session.last_name,
             newsData: allNews.articles,
-            trendingData: await allCompanies
-
+            trendingData: allCompanies,
+            topEarnerData: allTopEarners
         },
         partials: {
             partial: "partial-dashboard"

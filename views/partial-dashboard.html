@@ -24,8 +24,18 @@
 
                 <div class="indices small-card ticker">
                     <h2 class="small-card-title">Market</h2>
-                    <hr>
+
+                    <hr> ${topEarnerData.map(info => `
                     <div class="single-item">
+                        <p>${info.symbol}</p>
+                        <p class="small-ticker-value">
+                            <span class=${info.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${info.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${Math.floor(info.changePercent * 100)}%</p>
+                    </div>
+                    `).join(' ')}
+                </div>
+
+
+                <!-- <div class="single-item">
                         <p>S&P 500</p>
                         <p class="small-ticker-value"><span class="up-arrow">&uarr;</span> 1.1%</p>
                     </div>
@@ -41,7 +51,7 @@
                         <p>MSCI EAFE</p>
                         <p class="small-ticker-value"><span class="up-arrow">&uarr;</span> 0.4%</p>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="trending-stocks small-card ticker">
                     <h2 class="small-card-title">Trending</h2>
@@ -51,7 +61,7 @@
                     <div class="single-item">
                         <p>${info.symbol}</p>
                         <p class="small-ticker-value">
-                            <span class=${info.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${info.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${info.changePercent}</p>
+                            <span class=${info.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${info.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${( info.changePercent * 100).toFixed(1)}%</p>
                     </div>
                     `).join(' ')}
                 </div>
