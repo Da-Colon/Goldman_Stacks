@@ -128,7 +128,7 @@ async function getLeaderboardUsers(currentUserID) {
       i++;
     }
 
-    db.$pool.end();
+
     return leaderboard;
 
 }
