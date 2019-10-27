@@ -6,6 +6,7 @@ const returns = require('../controller/returns');
 const db = require('../models/conn');
 
 
+
 /* GET home page. */
 router.get("/", async(req, res, next) => {
     const trendingNews = await iex.getTopBusinessNews(4);
@@ -16,6 +17,10 @@ router.get("/", async(req, res, next) => {
 
     const topCompanies = await iex.getTopEarningCompanies();
     const allTopEarners = await topCompanies.data;
+
+    const markets = await returns.getIndexValues();
+
+    console.log("what is this", markets)
 
     const leaderboard = await portfolioValues.getLeaderboardUsers(req.session.user_id);
 
@@ -35,7 +40,7 @@ router.get("/", async(req, res, next) => {
             userLastName: req.session.last_name,
             newsData: allNews.articles,
             trendingData: allCompanies,
-            topEarnerData: allTopEarners,
+            market: markets,
             leaders: leaderboard,
             portVals: userPortValues
         },
