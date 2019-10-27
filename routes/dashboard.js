@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const iex = require('../models/iex');
 const portfolioValues = require('../controller/portfolio_values');
+const returns = require('../controller/returns');
 const db = require('../models/conn');
 
 
@@ -17,8 +18,11 @@ router.get("/", async(req, res, next) => {
     const allTopEarners = await topCompanies.data;
 
     const leaderboard = await portfolioValues.getLeaderboardUsers(req.session.user_id);
-    // console.log(req.session.user_id);
-    console.log(leaderboard);
+
+    const userPortValues = await returns.getPortfolioValues(req.session.user_id);
+    console.log('Logging all portfolio values:');
+    console.log(userPortValues);
+
 
     // console.log("TRENDING", allCompanies)
 
@@ -32,7 +36,8 @@ router.get("/", async(req, res, next) => {
             newsData: allNews.articles,
             trendingData: allCompanies,
             topEarnerData: allTopEarners,
-            leaders: leaderboard
+            leaders: leaderboard,
+            portVals: userPortValues
         },
         partials: {
             partial: "partial-dashboard"
@@ -40,7 +45,7 @@ router.get("/", async(req, res, next) => {
     });
 
     // Checks if the daily portfolio values need to be updated.
-    await portfolioValues.updatePortfolioValuesIfNeeded();
+    let updatedValues = await portfolioValues.updatePortfolioValuesIfNeeded();
     db.$pool.end(); // Done after the functions so we don't close the pool multiple times.
 
 });

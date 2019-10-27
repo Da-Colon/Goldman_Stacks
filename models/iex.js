@@ -46,7 +46,7 @@ const getMultipleCompanyNews = async(tickerArray) => {
 
     // Fetches the news for all symbols passed in
     try {
-        const { data } = await axios.get(`https://cloud.iexapis.com/stable/stock/market/batch?symbols=${tickerString}&types=news&last=1&token=pk_fb66ab77a4b6406a838e0db01df0416c`);
+        const { data } = await axios.get(`https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${tickerString}&types=news&last=1&token=Tpk_8670b146a6084c8b9bba64c09c443eed`);
         // console.log(data);
         // console.log(data.AAPL)
         return data;
