@@ -91,6 +91,14 @@ const getMultipleCompanyQuotes = async(tickerArray) => {
 const getTopBusinessNews = async(numOfArticles) => {
 
     const { data } = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${numOfArticles}&apiKey=335ef27328fb481aa97916cb3c338206`)
+    
+    for (let item of data.articles) {
+      // console.log(item.title.replace(/^(.{45}[^\s]*).*/, "$1") + "...");
+      item.title = item.title.replace(/^(.{45}[^\s]*).*/, "$1") + "...";
+    };
+    // console.log(data);
+      // "this is a longish string of text".replace(/^(.{11}[^\s]*).*/, "$1"); 
+    
     return { data };
 
 }
@@ -120,7 +128,7 @@ const getTopEarningCompanies = async() => {
     return { data };
 }
 
-
+// getTopBusinessNews(5);
 
 module.exports = {
     getStockPrice,
