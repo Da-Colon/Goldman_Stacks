@@ -119,13 +119,14 @@ header {
     width: 50px;
 }
 
-header>img {
+header>img, header>a>img {
     width: 50px;
     padding: 8px;
+    margin-left: 5px;
     cursor: pointer;
 }
 
-header>img:hover {
+header>img:hover, header>a>img:hover {
     transform: scale(1.2);
     /* border: 3px solid rgb(20, 20, 141); */
 }
