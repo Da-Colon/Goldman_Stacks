@@ -1,6 +1,7 @@
 // const https = require('https');
 const axios = require('axios');
 const numeral = require('numeral');
+const _ = require('lodash');
 // const fs = require('fs');
 
 // SANDBOX URL
@@ -60,7 +61,7 @@ const getSymbolList = async() => {
 const getSingleCompanyNews = async(symbol) => {
 
     const { data } = await axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/news/last/5?token=pk_fb66ab77a4b6406a838e0db01df0416c`)
-        // console.log(data)
+        
     return { data }
 
 }
@@ -70,12 +71,15 @@ const getMultipleCompanyNews = async(tickerArray) => {
 
     let tickerString = '';
     const arrLength = tickerArray.length;
+    shuffledTickerArray = _.shuffle(tickerArray);
 
     // Builds the string of ticker symbols
-    tickerArray.forEach((ticker) => {
-            if (ticker !== 'USERCASH') {
+    let numOfTickers = 0;
+    shuffledTickerArray.forEach((ticker) => {
+            if (ticker !== 'USERCASH' && numOfTickers < 5) {
                 tickerString += ticker;
-                !(tickerArray.indexOf(ticker) === arrLength - 1) && (tickerString += ',');
+                !(shuffledTickerArray.indexOf(ticker) === arrLength - 1) && (tickerString += ',');
+                numOfTickers++;
             }
         })
         // console.log(tickerString);

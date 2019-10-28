@@ -7,6 +7,7 @@ const db = require('../models/conn');
 const stacksDB = require('../models/stacksDB');
 const tickerList = require('../models/tickerList');
 const numeral = require('numeral');
+const _ = require('lodash');
 
 
 router.post("/", async(req, res, next) => {
@@ -36,18 +37,21 @@ router.get("/:ticker", async(req, res, next) => {
 
     const companyNews = await iex.getSingleCompanyNews(ticker);
     const newsData = await companyNews.data;
-    // console.log(companyNews);
+    const shuffledNewsData = _.shuffle(newsData);
+    console.log(newsData);
+    console.log(shuffledNewsData);
 
     let userPositions = await stacksDB.getPositionDataForUser(req.session.user_id, ticker);
-    console.log(userPositions);
+    // console.log(userPositions);
 
     // If the position doesn't exist, create the object to pass to the template
     if (userPositions.position.length === 0) {
         userPositions.position[0] = {};
-        userPositions.position[0].value = 0;
+        userPositions.position[0].value = '$0.00';
         userPositions.position[0].num_shares = 0;
         userPositions.position[0].gainLoss = 0;
         userPositions.position[0].gainLossStr = '0.0%';
+        userPositions.position[0].costBasisStr = '$0.00';
     } else {
         userPositions.position[0].value = numeral(userPositions.position[0].num_shares * stockData.latestPrice).format('$0,0.00');
         userPositions.position[0].valueNum = userPositions.position[0].num_shares * stockData.latestPrice;
@@ -55,7 +59,7 @@ router.get("/:ticker", async(req, res, next) => {
         userPositions.position[0].gainLossStr = numeral(userPositions.position[0].valueNum / userPositions.position[0].basis - 1).format('0.0%');
     }
 
-    console.log(userPositions);
+    // console.log(userPositions);
 
     let userCash = await stacksDB.getPositionDataForUser(req.session.user_id, 'USERCASH');
     let cash = numeral(userCash.position[0].num_shares).format('$0,0.00');

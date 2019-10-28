@@ -186,6 +186,11 @@ CARD STYLES
   padding: 35px 40px;
 }
 
+.bottom.small-card p {
+  font-size: 1.3rem;
+  padding: 7px 5px;
+}
+
 .bottom a {
   color: inherit;
   text-decoration: none;
