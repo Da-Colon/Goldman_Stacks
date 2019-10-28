@@ -1,0 +1,70 @@
+<head>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/companyPage.css">
+</head>
+
+<body>
+    <div class="header-background-overlay"></div>
+    <div class="background-overlay">
+
+        <header>
+            <div class="logo-group">
+                <img src="images/pancakes.svg">
+                <span>Goldman Stacks</span>
+            </div>
+
+            <!-- SEARCH BAR -->
+            <div class="search-bar-ctn">
+                <form action="/companyPage/search" method="POST">
+                    <input type="text" name="search_bar">
+                    <button type="submit">SEARCH</button>
+                </form>
+            </div>
+
+            <h2 class="hide-on-mobile">${userFirstName}</h2>
+            <img src="images/magnifying-glass.svg">
+            <a href="/users/logout"><img src="images/logout.svg"></a>
+        </header>
+
+        <main>
+
+            <div class="left-sidebar">
+
+                <div class="indices small-card ticker">
+
+                    <h1 class="small-card-title">${companyStockData.companyName}</h1>
+                    <h2>${companyStockData.symbol}</h2>
+                    <hr>
+                    <p>High: ${companyStockData.high}</p>
+                    <p>Low: ${companyStockData.low}</p>
+                    <p>LastestPrice: ${companyStockData.latestPrice}</p>
+                    <p>Change: ${companyStockData.changePercent}</p>
+
+
+
+                </div>
+            </div>
+
+            <div class="bottom small-card">
+                <h1 class="small-card-title">COMPANY NEWS</h1>
+                <hr> ${companyNewsData.map(info => `
+                <p>${info.headline}</p>
+
+                `)}
+            </div>
+
+
+            <div class="right-sidebar">
+                <div class="indices small-card ticker">
+                    <h1 class="small-card-title">Buy and sell</h1>
+
+                    <hr>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+
+</body>
