@@ -1,5 +1,6 @@
 const db = require('./conn');
 const Moment = require('moment');
+const numeral = require('numeral');
 
 // NOTE: When a new user signs up, we need to create a position for them in the positions table with their initial $100,000
 
@@ -380,6 +381,12 @@ async function getPositionDataForUser(userID, ticker) {
       console.log(`ERROR: Position query for userID: ${userID} for ${ticker} from stacksDB.getPositionDataForUser method failed.`);
       console.log(err);
       // db.$pool.end(); return;
+    }
+
+    // Adds a numerical value for the basis (non-string)
+    for (let item of position) {
+      item.basis = Number(item.cost_basis);
+      item.costBasisStr = numeral(Number(item.cost_basis)).format('$0,0.00');
     }
 
 

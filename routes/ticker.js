@@ -44,11 +44,16 @@ router.get("/:ticker", async(req, res, next) => {
     userPositions.position[0] = {};
     userPositions.position[0].value = 0;
     userPositions.position[0].num_shares = 0;
+    userPositions.position[0].gainLoss = 0;
+    userPositions.position[0].gainLossStr = '0.0%';
   } else {
     userPositions.position[0].value = numeral(userPositions.position[0].num_shares * stockData.latestPrice).format('$0,0.00');
+    userPositions.position[0].valueNum = userPositions.position[0].num_shares * stockData.latestPrice;
+    userPositions.position[0].gainLoss = userPositions.position[0].valueNum / userPositions.position[0].basis - 1
+    userPositions.position[0].gainLossStr = numeral(userPositions.position[0].valueNum / userPositions.position[0].basis - 1).format('0.0%');
   }
   
-  // console.log(userPositions);
+  console.log(userPositions);
 
   let userCash = await stacksDB.getPositionDataForUser(req.session.user_id, 'USERCASH');
   let cash = numeral(userCash.position[0].num_shares).format('$0,0.00');
