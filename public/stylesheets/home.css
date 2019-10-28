@@ -223,6 +223,7 @@ CARD STYLES
 
 .small-ticker-value {
     font-weight: 500;
+    white-space: nowrap;
 }
 
 .trending-news a {
@@ -283,7 +284,7 @@ CENTER COLUMN
 }
 
 .search-bar-container {
-  margin: 40px 0;
+  margin: 30px 0 50px 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -360,6 +361,10 @@ input:focus {
     border-radius: 10px;
 }
 
+.buy-sell a:hover {
+  text-decoration: none;
+}
+
 .buy-button,
 .sell-button {
     display: flex;
@@ -375,6 +380,7 @@ input:focus {
     box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.11) inset;
     cursor: pointer;
     transition: 100ms ease all;
+    height: 100%;
 }
 
 .buy-button:hover,
@@ -525,6 +531,7 @@ input:focus {
         font-weight: 700;
         font-size: 2.5rem;
         margin-bottom: 10px;
+        text-align: center;
     }
     .position-row {
         grid-template-columns: 4fr 5fr 5fr;

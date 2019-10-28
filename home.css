@@ -299,6 +299,13 @@ h1 .down-arrow {
     border-radius: 10px;
 }
 
+.buy-sell {
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  text-decoration: underline;
+}
+
 .buy-button,
 .sell-button {
     display: flex;

@@ -43,27 +43,27 @@
                         <form action="/users/signup" method="POST">
 
                             <label>First Name
-                  <input type="text" aria-placeholder="First Name" name="first_name" id="first_name">
+                  <input type="text" aria-placeholder="First Name" name="first_name" id="first_name" required>
                 </label>
                             <br>
 
                             <label>Last Name
-                  <input type="text" aria-placeholder="Last Name" name="last_name" id="last_name">
+                  <input type="text" aria-placeholder="Last Name" name="last_name" id="last_name" required>
                 </label>
                             <br>
 
                             <label>Email Address
-                  <input type="email" aria-placeholder="Email Address" name="email_address">
+                  <input type="text" aria-placeholder="Email Address" name="email_address" required>
                 </label>
                             <br>
 
                             <label>Select Password
-                  <input type="password" aria-placeholder="Set Your Password" name="password">
+                  <input type="password" aria-placeholder="Set Your Password" name="password" id="password" required>
                 </label>
                             <br>
 
                             <label>Comfirm Password
-                  <input type="password" aria-placeholder="Comfirm Your Password" name="comfirm_password">
+                  <input type="password" aria-placeholder="Comfirm Your Password" name="confirm_password" id="confirm_password" required>
                 </label>
                             <br>
 
@@ -109,7 +109,7 @@
 
         </footer>
     </div>
+    <script src="/scripts/indexScripts.js" type="text/javascript"></script>
 </body>
-<script src="/scripts/indexScripts.js" type="text/javascript"></script>
 
 </html>

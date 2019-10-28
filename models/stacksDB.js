@@ -20,6 +20,7 @@ const Moment = require('moment');
 // Buys the specified amount of stock and updates cash, records the transaction
 async function buyStock(userID, ticker, quantity, price, company_name) {
     let response;
+    quantity = Math.round(quantity);
     let purchasePrice = quantity * price;
 
     // Initializing the cash and stock objects
@@ -131,6 +132,7 @@ async function buyStock(userID, ticker, quantity, price, company_name) {
 async function sellStock(userID, ticker, quantity, price) {
 
     let response;
+    quantity = Math.round(quantity);
     let salePrice = quantity * price;
 
     // Initializing the cash and stock objects
@@ -214,8 +216,9 @@ async function sellStock(userID, ticker, quantity, price) {
     } else {
         // If we're selling LESS THAN ALL of the shares, decrease the basis (average cost) and remove the shares
         let newCostBasis = stock.basis - (stock.basis / stock.shares) * quantity;
+        let newQuantity = stock.shares - quantity;
         try {
-            updatePositions = await db.result(`UPDATE positions SET num_shares = $1, cost_basis = $2 WHERE id = $3;`, [quantity, newCostBasis, stock.positionID]);
+            updatePositions = await db.result(`UPDATE positions SET num_shares = $1, cost_basis = $2 WHERE id = $3;`, [newQuantity, newCostBasis, stock.positionID]);
         } catch (err) {
             console.log(`ERROR: Issue when removing the sold portion of the position when selling ${ticker} with the User.sellStock method.`);
             db.$pool.end();
