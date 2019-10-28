@@ -140,20 +140,20 @@ MAIN POSITIONING
 
 main {
     display: grid;
-    grid-template-columns: 2fr 5fr 2fr;
-    grid-template-areas: "left center right";
+    grid-template-columns: 4fr 4fr;
+    grid-template-areas: "left right" "bottom bottom";
 }
 
 .left-sidebar {
     grid-area: left;
 }
 
-.center-column {
-    grid-area: center;
-    position: relative;
+.bottom {
+    grid-area: bottom;
+    /* position: relative; */
     top: -90px;
     box-shadow: 0px 20px 40px 20px rgba(101, 75, 109, 0.2), 0px 10px 10px 5px rgba(101, 75, 109, 0.15);
-    background-color: rgba(255, 255, 255, 0.5);
+    /* background-color: rgba(255, 255, 255, 0.5); */
 }
 
 .right-sidebar {
@@ -184,10 +184,6 @@ CARD STYLES
 
 .small-card-title {
     margin-bottom: 12px;
-}
-
-.left-sidebar .small-card-title {
-    text-align: right;
 }
 
 .single-item {
