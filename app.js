@@ -15,8 +15,9 @@ require("dotenv").config();
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-const dashboardRouter = require("./routes/dashboard")
-const tickerRouter = require("./routes/ticker")
+const dashboardRouter = require("./routes/dashboard");
+const tickerRouter = require("./routes/ticker");
+const companyPageRouter = require("./routes/companyPage");
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/ticker", tickerRouter);
+app.use("/companyPage", companyPageRouter);
 
 
 module.exports = app;

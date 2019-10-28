@@ -15,8 +15,8 @@ const fs = require('fs');
 // Returns the stock price AND key financial stats for a single company
 const getStockPrice = async(symbol) => {
     const { data } = await axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=pk_fb66ab77a4b6406a838e0db01df0416c`)
-    console.log(data);
-
+    // console.log(data)
+    return { data }
     // Includes a lot of good stats. We should be able to just use this for the company page;
 
 };
@@ -47,7 +47,8 @@ const getSymbolList = async() => {
 const getSingleCompanyNews = async(symbol) => {
 
     const { data } = await axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/news/last/5?token=pk_fb66ab77a4b6406a838e0db01df0416c`)
-    console.log(data)
+        // console.log(data)
+    return { data }
 
 }
 
@@ -113,14 +114,14 @@ const getMultipleCompanyQuotes = async(tickerArray) => {
 const getTopBusinessNews = async(numOfArticles) => {
 
     const { data } = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${numOfArticles}&apiKey=335ef27328fb481aa97916cb3c338206`)
-    
+
     for (let item of data.articles) {
-      // console.log(item.title.replace(/^(.{45}[^\s]*).*/, "$1") + "...");
-      item.title = item.title.replace(/^(.{45}[^\s]*).*/, "$1") + "...";
+        // console.log(item.title.replace(/^(.{45}[^\s]*).*/, "$1") + "...");
+        item.title = item.title.replace(/^(.{45}[^\s]*).*/, "$1") + "...";
     };
     // console.log(data);
-      // "this is a longish string of text".replace(/^(.{11}[^\s]*).*/, "$1"); 
-    
+    // "this is a longish string of text".replace(/^(.{11}[^\s]*).*/, "$1"); 
+
     return { data };
 
 }
