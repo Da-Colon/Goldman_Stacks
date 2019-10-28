@@ -71,13 +71,13 @@ router.post("/login", async(req, res, next) => {
         res.status(200).redirect("/dashboard");
 
     } else {
-        res.sendStatus(401);
+        res.redirect('/');
     }
 });
 
-router.get('/logout', function (req, res, next) {
-  req.session.destroy();
-  res.status(200).redirect('/');
+router.get('/logout', function(req, res, next) {
+    req.session.destroy();
+    res.status(200).redirect('/');
 })
 
 module.exports = router;
