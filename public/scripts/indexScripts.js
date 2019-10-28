@@ -20,7 +20,21 @@ signupInsteadButton.addEventListener('click', (e) => {
     loginRow.classList.add('hide-row');
 });
 
-// Check to see if user Password was typed correctly twice
+const firstName = document.getElementById('first_name');
+const LastName = document.getElementById('last_name');
+
+
+firstName.oninput = function() {
+    if (this.value.length > 12) {
+        this.value = this.value.slice(0, 12);
+    }
+}
+lastName.oninput = function() {
+        if (this.value.length > 12) {
+            this.value = this.value.slice(0, 12);
+        }
+    }
+    // Check to see if user Password was typed correctly twice
 var password = document.getElementById("password"),
     confirm_password = document.getElementById("confirm_password");
 
