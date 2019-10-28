@@ -51,7 +51,7 @@ router.get("/", async(req, res, next) => {
 
     // Checks if the daily portfolio values need to be updated.
     let updatedValues = await portfolioValues.updatePortfolioValuesIfNeeded();
-    db.$pool.end(); // Done after the functions so we don't close the pool multiple times.
+    // db.$pool.end(); // Done after the functions so we don't close the pool multiple times.
 
 });
 
