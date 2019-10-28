@@ -11,16 +11,16 @@ const numeral = require('numeral');
 
 router.post("/", async(req, res, next) => {
 
-  const {ticker} = req.body;
-  let upperTicker = ticker.toUpperCase();
-  let tickerFound = tickerList.tickers.includes(upperTicker);
-  console.log(tickerFound);
+    const { ticker } = req.body;
+    let upperTicker = ticker.toUpperCase();
+    let tickerFound = tickerList.tickers.includes(upperTicker);
+    console.log(tickerFound);
 
-  if (tickerFound) {
-    res.status(200).redirect(`/ticker/${upperTicker}`);
-  } else {
-    res.redirect('back');
-  }
+    if (tickerFound) {
+        res.status(200).redirect(`/ticker/${upperTicker}`);
+    } else {
+        res.redirect('back');
+    }
 
 });
 
