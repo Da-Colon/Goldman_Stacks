@@ -1,7 +1,5 @@
 <head>
-
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/companyPage.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ticker.css">
 </head>
 
 <body>
@@ -10,13 +8,12 @@
 
         <header>
             <div class="logo-group">
-                <img src="images/pancakes.svg">
+                <img src="/images/pancakes.svg">
                 <span>Goldman Stacks</span>
             </div>
 
             <h2 class="hide-on-mobile">${userFirstName}</h2>
-            <img src="images/magnifying-glass.svg">
-            <a href="/users/logout"><img src="../images/logout.svg"></a>
+            <a href="/users/logout"><img src="/images/logout.svg"></a>
         </header>
 
         <main>
@@ -25,13 +22,48 @@
 
                 <div class="indices small-card ticker">
 
-                    <h1 class="small-card-title">${companyStockData.companyName}</h1>
-                    <h2>${companyStockData.symbol}</h2>
+                    <h1 class="small-card-title company-name">${companyStockData.companyName}</h1>
+                    <h2 class="ticker-title">${companyStockData.symbol}</h2>
                     <hr>
-                    <p>High: ${companyStockData.high}</p>
-                    <p>Low: ${companyStockData.low}</p>
-                    <p>LastestPrice: ${companyStockData.latestPrice}</p>
-                    <p>Change: ${companyStockData.changePercent}</p>
+                    <div class="company-datapoint-wrapper">
+                      <div class="company-datapoint">
+                        <p class="datapoint-title"><strong>Price: </strong></p>
+                        <p class="datapoint-data"><strong>${companyStockData.latestPriceStr}</strong></p>
+                      </div>
+                      <div class="company-datapoint">
+                        <p class="datapoint-title">Market Cap: </p>
+                        <p class="datapoint-data">${companyStockData.marketCap}</p>
+                      </div>
+                      <div class="company-datapoint">
+                        <p class="datapoint-title">Change: </p>
+                        <p class="datapoint-data"><span class=${(companyStockData.change>= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
+                          </span> ${companyStockData.changeStr}</p>
+                      </div>
+                      <div class="company-datapoint">
+                        <p class="datapoint-title">Change %: </p>
+                        <p class="datapoint-data"><span class=${(companyStockData.change>= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
+                          </span> ${companyStockData.changePercent}</p>
+                      </div>
+                      <div class="company-datapoint">
+                        <p class="datapoint-title">YTD: </p>
+                        <p class="datapoint-data"><span class=${(companyStockData.ytdChange>= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
+                          </span> ${companyStockData.ytdChangeStr}</p>
+                      </div>
+                      <div class="company-datapoint">
+                        <p class="datapoint-title">PE Ratio: </p>
+                        <p class="datapoint-data">${companyStockData.peRatio}</p>
+                      </div>
+                      <div class="company-datapoint">
+                        <p class="datapoint-title">52 Wk Low: </p>
+                        <p class="datapoint-data">${companyStockData.week52Low}</p>
+                      </div>
+                      <div class="company-datapoint">
+                        <p class="datapoint-title">52 Wk High: </p>
+                        <p class="datapoint-data">${companyStockData.week52High}</p>
+                      </div>
+
+                    </div>
+
 
 
 
@@ -39,19 +71,50 @@
             </div>
 
             <div class="bottom small-card">
-                <h1 class="small-card-title">COMPANY NEWS</h1>
-                <hr> ${companyNewsData.map(info => `
-                <p>${info.headline}</p>
-
-                `)}
+                <h2 class="small-card-title">Company News</h2>
+                <hr> 
+                ${companyNewsData.map(info => `
+                  <a href="${info.url}" target="_blank"><p>${info.headline}</p></a>
+                `).join('')}
             </div>
 
 
             <div class="right-sidebar">
                 <div class="indices small-card ticker">
-                    <h1 class="small-card-title">Buy and sell</h1>
-
+                    <h2 class="small-card-title">Your Portfolio</h2>
                     <hr>
+                    <div class="your-positions-datapoint">
+                      <h3 class="datapoint-title">Currently Own: </h3>
+                      <h3 class="datapoint-data">${position.num_shares} Shares</h3>
+                    </div>
+                    <div class="your-positions-datapoint">
+                      <h3 class="datapoint-title">Total Value: </h3>
+                      <h3 class="datapoint-data">${position.value}</h3>
+                    </div>
+                    <div class="your-positions-datapoint">
+                      <h3 class="datapoint-title">Cash Available: </h3>
+                      <h3 class="datapoint-data">${cash}</h3>
+                    </div>
+                    
+                    <form action="/transaction/buy" method="POST">
+                      <h3>Buy Shares:</h3>
+                      <input type="number" name="num_shares">
+                      <input type="hidden" name="ticker" value="${companyStockData.symbol}" />
+                      <input type="hidden" name="user_id" value="${user_id}" />
+                      <input type="hidden" name="price" value="${companyStockData.latestPrice}" />
+                      <input type="hidden" name="company_name" value="${companyStockData.companyName}" />
+                      <button type="submit" class="buy-button">Buy</button>
+                    </form>
+                    
+                    <form action="/transaction/sell" method="POST">
+                      <h3>Sell Shares:</h3>
+                      <input type="number" name="num_shares">
+                      <input type="hidden" name="ticker" value="${companyStockData.symbol}" />
+                      <input type="hidden" name="user_id" value="${user_id}" />
+                      <input type="hidden" name="price" value="${companyStockData.latestPrice}" />
+                      <input type="hidden" name="company_name" value="${companyStockData.companyName}" />
+                      <button type="submit" class="sell-button">Sell</button>
+                    </form>
                 </div>
             </div>
 

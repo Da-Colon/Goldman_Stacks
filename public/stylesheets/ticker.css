@@ -52,7 +52,7 @@ h3 {
 }
 
 p {
-    padding: 0.4rem;
+    padding: 0.2rem;
     /* text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), 
 0px 1px 15px rgba(0, 0, 0, 0.05); */
     font-weight: 400;
@@ -77,7 +77,7 @@ HEADER
 header {
     width: 100%;
     height: 60px;
-    margin-bottom: 70px;
+    margin-bottom: 30px;
     padding-top: 10px;
     /* margin-left: -50px;
 margin-right: -50px; */
@@ -140,7 +140,7 @@ MAIN POSITIONING
 
 main {
     display: grid;
-    grid-template-columns: 4fr 4fr;
+    grid-template-columns: 5fr 4fr;
     grid-template-areas: "left right" "bottom bottom";
 }
 
@@ -165,25 +165,47 @@ main {
 CARD STYLES
 */
 
-.left-sidebar {
-    padding-right: 30px;
+.left-sidebar, .right-sidebar {
+    padding: 0 15px 30px 15px;
+    height: 100%;
 }
 
-.right-sidebar {
-    padding-left: 30px;
+.bottom.small-card {
+  margin: 0 15px;
+  padding: 25px 30px;
+}
+
+.bottom a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.bottom a:hover {
+  text-decoration: underline;
 }
 
 .small-card {
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 20px;
-    margin: -10px -15px;
-    padding: 10px 15px;
-    margin-bottom: 40px;
+    /* margin: -10px -15px; */
+    padding: 15px 20px;
+    margin-bottom: 30px;
     box-shadow: 0px 20px 40px 20px rgba(101, 75, 109, 0.1), 0px 10px 10px 5px rgba(101, 75, 109, 0.05);
+    height: 100%;
 }
 
 .small-card-title {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.small-card-title.company-name {
+  margin-bottom: 6px;
+}
+
+.ticker-title {
+  margin-bottom: 10px;
+  font-weight: 400;
 }
 
 .single-item {
@@ -197,6 +219,10 @@ CARD STYLES
     display: inline-block;
 }
 
+.display-none {
+  display: none;
+}
+
 .left-sidebar hr,
 .right-sidebar hr {
     border: none;
@@ -205,13 +231,6 @@ CARD STYLES
     margin-top: 0;
 }
 
-.left-sidebar hr {
-    background-image: linear-gradient(to left, rgba(105, 103, 89, 0.6) 0%, rgba(105, 103, 89, 0.6) 15%, rgba(105, 103, 89, 0) 80%);
-}
-
-.right-sidebar hr {
-    background-image: linear-gradient(to right, rgba(105, 103, 89, 0.6) 0%, rgba(105, 103, 89, 0.6) 15%, rgba(105, 103, 89, 0) 80%);
-}
 
 .small-card.ticker p {
     font-size: 1.15rem;
@@ -228,6 +247,33 @@ CARD STYLES
 
 .trending-news a:hover {
     text-decoration: underline;
+}
+
+.company-datapoint-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.company-datapoint {
+  width: 49%;
+  padding: 0 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.your-positions-datapoint {
+  min-width: 60%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .up-arrow,
@@ -252,6 +298,26 @@ h1 .down-arrow {
     /* color: rgb(238, 95, 95); */
 }
 
+.right-sidebar form {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.right-sidebar form input {
+  border: none;
+  height: 100%;
+  /* width: 50%; */
+  font-size: 1rem;
+  border-radius: 10px;
+  margin: 0 10px;
+  padding: 3px 0 3px 10px;
+}
+
+.right-sidebar form input:focus {
+  outline: none;
+}
 
 /*
 CENTER COLUMN
@@ -323,13 +389,16 @@ CENTER COLUMN
     align-items: center;
     border: 1px solid black;
     border: none;
-    padding: 0 8px;
+    padding: 0 15px;
     font-weight: 700;
     color: #fff;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2), 0px 0px 5px rgba(0, 0, 0, 0.05);
     box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.11) inset;
     cursor: pointer;
     transition: 100ms ease all;
+    border-radius: 10px;
+    height: 25px;
+    font-size: 1rem;
 }
 
 .buy-button:hover,
@@ -338,19 +407,13 @@ CENTER COLUMN
 }
 
 .buy-button {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
     border-color: #328A76;
     /* box-shadow: 1px 1px 5px 3px #328A76; */
-    border-right: none;
     background-color: #4ed9b8;
 }
 
 .sell-button {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
     border-color: #921A3B;
-    border-left: none;
     background-color: #E1285B;
 }
 
@@ -386,42 +449,24 @@ CENTER COLUMN
 }
 
 @media only screen and (max-width: 1100px) {
-    main {
-        grid-template-columns: 2fr 5fr;
-        grid-template-rows: minmax(0, 1fr);
-        grid-template-areas: "left center" "right center";
-    }
-    .center-column {
-        grid-row-end: span 2;
-        top: -10px;
-        margin-bottom: auto;
-        margin-right: -15px;
-        padding: 30px;
-    }
-    .right-sidebar {
-        padding-right: 30px;
-        padding-left: 0;
-    }
-    .right-sidebar .small-card-title {
-        text-align: right;
-    }
-    .right-sidebar hr {
-        background-image: linear-gradient(to left, rgba(105, 103, 89, 0.6) 0%, rgba(105, 103, 89, 0.6) 15%, rgba(105, 103, 89, 0) 80%);
-    }
-    header {
-        margin-bottom: 30px;
-    }
+  html {
+    font-size: 16px;
+  }  
+
 }
 
 @media only screen and (max-width: 960px) {
     html {
-        font-size: 16px;
+        font-size: 14px;
+    }
+    .background-overlay {
+      padding: 0 30px;
     }
 }
 
 @media only screen and (max-width: 870px) {
     html {
-        font-size: 14px;
+        font-size: 12px;
     }
 }
 
@@ -432,10 +477,16 @@ CENTER COLUMN
     main {
         grid-template-columns: 1fr;
         grid-template-rows: minmax(0, max-content);
-        grid-template-areas: "center" "left" "right";
+        grid-template-areas: "left" "right" "bottom";
         padding: 0;
         margin: 0;
         width: 100%;
+    }
+    header {
+      margin-bottom: 10px;
+    }
+    .company-datapoint {
+      width: 100%;
     }
     .mobile-only {
         display: relative;
@@ -469,7 +520,7 @@ CENTER COLUMN
         padding: 0;
     }
     .left-sidebar {
-        margin-bottom: -20px;
+        /* margin-bottom: -20px; */
     }
     .page-title {
         flex-direction: column;
