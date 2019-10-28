@@ -548,6 +548,9 @@ CENTER COLUMN
     .left-sidebar hr {
         background-image: linear-gradient(to right, rgba(105, 103, 89, 0.6) 0%, rgba(105, 103, 89, 0.6) 15%, rgba(105, 103, 89, 0) 80%);
     }
+    .bottom.small-card hr {
+      background-image: linear-gradient(to right, rgba(105, 103, 89, 0.6) 0%, rgba(105, 103, 89, 0.6) 15%, rgba(105, 103, 89, 0) 80%);
+    }
     .center-column {
         box-shadow: 0px 20px 40px 20px rgba(101, 75, 109, 0.1), 0px 10px 10px 5px rgba(101, 75, 109, 0.05);
     }

@@ -7,12 +7,12 @@ Router for buys/sells. Refresh company page after purchase?
 Hook up the new signup/login page with the partials
 
 
-Mobile version company page
+DONE - Mobile version company page
 DONE - Num-shares error for new user company page
 DONE - Dashboard link on logo/name
 DONE - Sell shares on compnay page
-Leaderboard -100% new users - Puja
+DONE - Leaderboard -100% new users - Puja
 DONE - Only buy/sell whole numbers
 DONE - Hook up buy/sell buttons on dashboard
 Demo user account schema
-Prevent user from overselling/overbuying
+DONE - Prevent user from overselling/overbuying
