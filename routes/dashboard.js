@@ -9,6 +9,11 @@ const db = require('../models/conn');
 
 /* GET home page. */
 router.get("/", async(req, res, next) => {
+    if (req.session.user_id === undefined) {
+        res.redirect('/');
+    }
+
+
     const trendingNews = await iex.getTopBusinessNews(4);
     const allNews = await trendingNews.data;
 
@@ -27,7 +32,6 @@ router.get("/", async(req, res, next) => {
     const userPortValues = await returns.getPortfolioValues(req.session.user_id);
     // console.log('Logging all portfolio values:');
     // console.log(userPortValues);
-
 
     // console.log("TRENDING", allCompanies)
 
