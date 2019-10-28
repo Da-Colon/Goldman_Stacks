@@ -79,13 +79,13 @@
                 <hr>
 
                 <div class="search-bar-container">
-                  Enter a Ticker:
-                  <div class="searchBar">
-                      <img src="images/magnifying-glass.svg">
-                      <form action="/ticker" method="POST">
-                        <input type="text" name="ticker">
-                      </form>
-                  </div>
+                    Enter a Ticker:
+                    <div class="searchBar">
+                        <img src="images/magnifying-glass.svg">
+                        <form action="/ticker" method="POST" id="search_form">
+                            <input type="text" name="ticker" id="tickerValue">
+                        </form>
+                    </div>
                 </div>
 
                 <div class="large-card">
@@ -167,4 +167,6 @@
 
         </footer>
     </div>
+    <script src="../scripts/tickerList.js"></script>
+
 </body>
