@@ -299,6 +299,7 @@ CENTER COLUMN
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: stretch;
   margin-left: 15px;
   flex-grow: 1;
 }
@@ -308,7 +309,9 @@ CENTER COLUMN
   margin-right: 10px; 
   height: 20px;
 }
-
+.searchBar form {
+  width: 100%;
+}
 input {
   border: none;
   height: 100%;
