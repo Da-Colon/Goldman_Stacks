@@ -14,8 +14,6 @@ router.get("/", async(req, res, next) => {
     console.log("COMPANY------NEWS", companyNews)
 
 
-
-
     res.render("template", {
         locals: {
             title: "",

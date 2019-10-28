@@ -26,19 +26,30 @@ router.get("/:ticker", async(req, res, next) => {
 
   const ticker = req.params.ticker;
 
-  console.log(ticker);
+  const companyStockInfo = await iex.getStockPrice(ticker);
+  const stockData = await companyStockInfo.data;
+  console.log(stockData);
 
-  // NOT HOOKED UP YET
-  if (tickerFound) {
-    res.status(200).redirect(`/ticker/${upperTicker}`);
-  } else {
-    res.redirect('back');
-  }
+  const companyNews = await iex.getSingleCompanyNews(ticker);
+  const newsData = await companyNews.data;
+  console.log(companyNews);
+
+  res.render("template", {
+      locals: {
+          title: "",
+          isLoggedIn: req.session.is_logged_in,
+          userFirstName: req.session.first_name,
+          user_id: req.session.user_id,
+          companyStockData: stockData,
+          companyNewsData: newsData
+      },
+      partials: {
+          partial: "partial-ticker"
+      }
+  });
+
 
 });
-
-
-
 
 
 module.exports = router;
