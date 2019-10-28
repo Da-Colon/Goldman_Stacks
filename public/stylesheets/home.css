@@ -17,6 +17,7 @@ body {
     padding: 0;
     margin: 0;
     background: linear-gradient(50deg, rgb(202, 243, 252), rgb(243, 224, 255), rgb(202, 243, 252));
+    min-height: 100vh;
 }
 
 .background-overlay {
@@ -296,6 +297,12 @@ CENTER COLUMN
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.search-bar-container em {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-right: -3px;
 }
 
 .searchBar {
