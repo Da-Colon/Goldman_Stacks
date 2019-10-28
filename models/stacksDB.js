@@ -123,7 +123,7 @@ async function buyStock(userID, ticker, quantity, price, company_name) {
         return;
     }
 
-    db.$pool.end();
+    // db.$pool.end();
     return;
 };
 
@@ -235,7 +235,7 @@ async function sellStock(userID, ticker, quantity, price) {
         return;
     }
 
-    db.$pool.end();
+    // db.$pool.end();
     return;
 }
 
@@ -290,7 +290,7 @@ async function returnAllPositionsInPortfolio(userID) {
       // db.$pool.end(); return;
     }
 
-    db.$pool.end();
+    // db.$pool.end();
     return positions;
 }
 
@@ -362,6 +362,36 @@ async function updateUserPortfolioNoClose(userID, portfolioValue, valueDateStrin
   return;
 }
 
+async function getPositionDataForUser(userID, ticker) {
+
+    let upperTicker = ticker.toUpperCase();
+    let position;
+    // Grab all current positions
+    try {
+      position = await db.any(`SELECT * FROM positions WHERE user_id = $1 AND ticker = $2;`, [userID, upperTicker]);
+      // console.log(position);
+    } catch(err) {
+      console.log(`ERROR: Position query for userID: ${userID} for ${ticker} from stacksDB.getPositionDataForUser method failed.`);
+      console.log(err);
+      // db.$pool.end(); return;
+    }
+
+
+    let transactions;
+    // Grab all current positions
+    try {
+      transactions = await db.any(`SELECT * FROM transactions WHERE user_id = $1 AND ticker = $2;`, [userID, upperTicker]);
+      // console.log(positions);
+    } catch(err) {
+      console.log(`ERROR: Transaction query for userID: ${userID} for ${ticker} from stacksDB.getPositionDataForUser method failed.`);
+      console.log(err);
+      // db.$pool.end(); return;
+    }
+
+    // db.$pool.end();
+    return {position, transactions};
+}
+
 
 
 // getAllUniqueTickers();
@@ -370,6 +400,12 @@ async function updateUserPortfolioNoClose(userID, portfolioValue, valueDateStrin
 // sellStock(1, 'AMZN', 4, 150);
 // giveNewUserInitialCash(3);
 // returnAllPositionsInPortfolio(1);
+// (async function() {
+//   const {position, transactions} = await getPositionDataForUser(1, 'AMZN');
+//   console.log(position);
+//   console.log(transactions);
+// })();
+
 
 
 module.exports = {
@@ -380,5 +416,6 @@ module.exports = {
   returnAllPositionsInPortfolioNoClose,
   getAllUsersNoClose,
   getAllUniqueTickersNoClose,
-  updateUserPortfolioNoClose
+  updateUserPortfolioNoClose,
+  getPositionDataForUser
 };

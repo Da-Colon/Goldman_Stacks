@@ -16,7 +16,7 @@ router.get("/", async(req, res, next) => {
     const allCompanies = await trendingCompanies.data;
 
     const topCompanies = await iex.getTopEarningCompanies();
-    const allTopEarners = await topCompanies.data;
+    // const allTopEarners = await topCompanies.data;
 
     const markets = await returns.getIndexValues();
 

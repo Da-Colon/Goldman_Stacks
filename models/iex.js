@@ -1,6 +1,6 @@
 // const https = require('https');
 const axios = require('axios');
-
+const fs = require('fs');
 
 // SANDBOX URL
 // https://sandbox.iexapis.com/...
@@ -15,9 +15,31 @@ const axios = require('axios');
 // Returns the stock price AND key financial stats for a single company
 const getStockPrice = async(symbol) => {
     const { data } = await axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=pk_fb66ab77a4b6406a838e0db01df0416c`)
-    console.log(data)
+    console.log(data);
 
     // Includes a lot of good stats. We should be able to just use this for the company page;
+
+};
+
+const getSymbolList = async() => {
+    // const { data } = await axios.get(`https://cloud.iexapis.com/stable/ref-data/symbols?token=pk_fb66ab77a4b6406a838e0db01df0416c`)
+    // console.log(data);
+    
+
+    // let dataArray = []
+    // for (obj of data) {
+    //   dataArray.push(obj.symbol);
+    // }
+    // console.log(dataArray);
+
+    // fs.writeFile('Exchange Symbols.txt', JSON.stringify(dataArray), (err) => {
+    //   // throws an error, you could also catch it here
+    //   if (err) throw err;
+  
+    //   // success case, the file was saved
+    //   console.log('Symbols saved!');
+    // });
+
 
 };
 
@@ -108,8 +130,10 @@ const getTrendingCompanies = async() => {
 
     // let trendingCompanies = {}
 
-    const { data } = await axios.get(`https://sandbox.iexapis.com/stable/stock/market/list/mostactive?listLimit=4&token=Tpk_8670b146a6084c8b9bba64c09c443eed`)
+    const { data } = await axios.get(`https://sandbox.iexapis.com/stable/stock/market/list/mostactive?listLimit=5&token=Tpk_8670b146a6084c8b9bba64c09c443eed`)
+    console.log(data);
     return { data };
+
 
 
     // data.forEach(item => {
@@ -129,6 +153,7 @@ const getTopEarningCompanies = async() => {
 }
 
 // getTopBusinessNews(5);
+// getSymbolList();
 
 module.exports = {
     getStockPrice,

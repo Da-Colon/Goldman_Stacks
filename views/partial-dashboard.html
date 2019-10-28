@@ -15,7 +15,6 @@
                 <span>Goldman Stacks</span>
             </div>
             <h2 class="hide-on-mobile">${userFirstName}</h2>
-            <img src="images/magnifying-glass.svg">
             <a href="/users/logout"><img src="images/logout.svg"></a>
         </header>
 
@@ -80,7 +79,15 @@
                 </div>
                 <hr>
 
-                <img class="full-graph" src="images/pancakes.svg">
+                <div class="search-bar-container">
+                  Enter a Ticker:
+                  <div class="searchBar">
+                      <img src="images/magnifying-glass.svg">
+                      <form action="/ticker" method="POST">
+                        <input type="text" name="ticker">
+                      </form>
+                  </div>
+                </div>
 
                 <div class="large-card">
 
