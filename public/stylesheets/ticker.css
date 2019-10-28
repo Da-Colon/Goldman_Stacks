@@ -281,7 +281,7 @@ CARD STYLES
 .your-positions-datapoint {
   min-width: 60%;
   max-width: 300px;
-  margin-top: 5px;
+  /* margin-top: 5px; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -361,7 +361,7 @@ h1 .down-arrow {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 5px;
+  /* margin-top: 5px; */
 }
 
 .right-sidebar form input {

@@ -99,6 +99,15 @@
                       <h3 class="datapoint-data">${position.value}</h3>
                     </div>
                     <div class="your-positions-datapoint">
+                      <h3 class="datapoint-title">Cost Basis: </h3>
+                      <h3 class="datapoint-data">${position.costBasisStr}</h3>
+                    </div>
+                    <div class="your-positions-datapoint">
+                      <h3 class="datapoint-title">Gain/Loss: </h3>
+                      <h3 class="datapoint-data"><span class=${(position.gainLoss>= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
+                        </span> ${position.gainLossStr}</h3>
+                    </div>
+                    <div class="your-positions-datapoint">
                       <h3 class="datapoint-title">Cash Available: </h3>
                       <h3 class="datapoint-data">${cash}</h3>
                     </div>
