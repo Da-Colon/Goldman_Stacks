@@ -29,29 +29,29 @@
 
 
                     <div class="single-item">
-                        <p>${market.SPY.quote.symbol}</p>
+                        <p>S&P 500</p>
                         <p class="small-ticker-value">
                             <span class=${market.SPY.quote.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${market.SPY.quote.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${( market.SPY.quote.changePercent * 100).toFixed(1)}%</p>
-
                     </div>
-                    <div class="single-item">
-                        <p>${market.EFA.quote.symbol}</p>
-                        <p class="small-ticker-value">
-                            <span class=${market.EFA.quote.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${market.EFA.quote.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${( market.EFA.quote.changePercent * 100).toFixed(1)}%</p>
 
-                    </div>
                     <div class="single-item">
-                        <p>${market.IWB.quote.symbol}</p>
+                        <p>Russell 1000</p>
                         <p class="small-ticker-value">
                             <span class=${market.IWB.quote.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${market.IWB.quote.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${( market.IWB.quote.changePercent * 100).toFixed(1)}%</p>
-
                     </div>
+
                     <div class="single-item">
-                        <p>${market.IWM.quote.symbol}</p>
+                        <p>Russell 2000</p>
                         <p class="small-ticker-value">
                             <span class=${market.IWM.quote.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${market.IWM.quote.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${( market.IWM.quote.changePercent * 100).toFixed(1)}%</p>
-
                     </div>
+
+                    <div class="single-item">
+                        <p>MSCI EAFE</p>
+                        <p class="small-ticker-value">
+                            <span class=${market.EFA.quote.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${market.EFA.quote.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${( market.EFA.quote.changePercent * 100).toFixed(1)}%</p>
+                    </div>
+
                 </div>
 
                 <div class="trending-stocks small-card ticker">
@@ -79,7 +79,7 @@
                 <hr>
 
                 <div class="search-bar-container">
-                  Enter a Ticker:
+                  <em>Enter a Ticker:</em>
                   <div class="searchBar">
                       <img src="images/magnifying-glass.svg">
                       <form action="/ticker" method="POST">
@@ -102,17 +102,22 @@
 
                     <div class="position-row">
                         <h2>Cash</h2>
-                        <div></div>
+                        <div class="hide-on-mobile"></div>
                         <h2 class="up-down-percent"></h2>
                         <h2 class="position-amount">${portVals.cash}</h2>
                     </div>
 
                     ${portVals.positions.map(item => `
                     <div class="position-row">
-                        <h2>${item.symbol}</h2>
+                        <h2><a href="/ticker/${item.symbol}">${item.symbol}</a></h2>
                         <div class="buy-sell">
-                            <div class="buy-button">Buy</div>
-                            <div class="sell-button">Sell</div>
+                            <a href="/ticker/${item.symbol}">
+                              <div class="buy-button">Buy</div>
+                            </a>
+                            <a href="/ticker/${item.symbol}">
+                              <div class="sell-button">Sell</div>
+                            </a>
+                          
                         </div>
                         <h2 class="up-down-percent"><span class=${(item.valueChange>= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
                             </span> ${item.changePercent}</h2>

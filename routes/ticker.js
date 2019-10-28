@@ -37,8 +37,18 @@ router.get("/:ticker", async(req, res, next) => {
   // console.log(companyNews);
 
   let userPositions = await stacksDB.getPositionDataForUser(req.session.user_id, ticker);
-  userPositions.position[0].value = numeral(userPositions.position[0].num_shares * stockData.latestPrice).format('$0,0.00');
   console.log(userPositions);
+
+  // If the position doesn't exist, create the object to pass to the template
+  if (userPositions.position.length === 0) {
+    userPositions.position[0] = {};
+    userPositions.position[0].value = 0;
+    userPositions.position[0].num_shares = 0;
+  } else {
+    userPositions.position[0].value = numeral(userPositions.position[0].num_shares * stockData.latestPrice).format('$0,0.00');
+  }
+  
+  // console.log(userPositions);
 
   let userCash = await stacksDB.getPositionDataForUser(req.session.user_id, 'USERCASH');
   let cash = numeral(userCash.position[0].num_shares).format('$0,0.00');
