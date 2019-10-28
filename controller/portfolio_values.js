@@ -90,7 +90,7 @@ async function updatePortfolioValuesIfNeeded() {
 
   };
 
-  db.$pool.end();
+  // db.$pool.end();
 
 }
 
