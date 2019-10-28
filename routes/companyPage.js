@@ -11,7 +11,7 @@ router.get("/", async(req, res, next) => {
 
     const companyNews = await iex.getSingleCompanyNews('FB');
     const newsData = await companyNews.data;
-    console.log("COMPANY------NEWS", companyNews)
+    // console.log("COMPANY------NEWS", companyNews)
 
 
     res.render("template", {
@@ -32,7 +32,7 @@ router.get("/", async(req, res, next) => {
 router.post("/search", async(req, res, next) => {
     const { searcn_bar } = req.body;
 
-    console.log("SEARCH", req.body.search_bar);
+    // console.log("SEARCH", req.body.search_bar);
 
     // if (addUser) {
     //     stacksDB.giveNewUserInitialCash(addUser.id);

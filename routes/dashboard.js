@@ -15,18 +15,18 @@ router.get("/", async(req, res, next) => {
     const trendingCompanies = await iex.getTrendingCompanies();
     const allCompanies = await trendingCompanies.data;
 
-    const topCompanies = await iex.getTopEarningCompanies();
+    // const topCompanies = await iex.getTopEarningCompanies();
     // const allTopEarners = await topCompanies.data;
 
     const markets = await returns.getIndexValues();
 
-    console.log("what is this", markets)
+    // console.log("what is this", markets)
 
     const leaderboard = await portfolioValues.getLeaderboardUsers(req.session.user_id);
 
     const userPortValues = await returns.getPortfolioValues(req.session.user_id);
-    console.log('Logging all portfolio values:');
-    console.log(userPortValues);
+    // console.log('Logging all portfolio values:');
+    // console.log(userPortValues);
 
 
     // console.log("TRENDING", allCompanies)

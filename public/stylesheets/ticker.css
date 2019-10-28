@@ -281,6 +281,7 @@ CARD STYLES
 .your-positions-datapoint {
   min-width: 60%;
   max-width: 300px;
+  margin-top: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -289,6 +290,48 @@ CARD STYLES
 
 .datapoint-data {
   white-space: nowrap;
+}
+
+.search-bar-container {
+  margin: 20px 0 0px 0;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchBar {
+  padding: 0px 10px;
+  height: 35px;
+  border: 1px solid lightgray;
+  border-radius: 15px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: stretch;
+  margin-left: 15px;
+  flex-grow: 1;
+}
+
+.searchBar img {
+  margin: 0px;
+  margin-right: 10px; 
+  height: 20px;
+}
+.searchBar form {
+  width: 100%;
+}
+input {
+  border: none;
+  height: 100%;
+  width: 100%;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
 }
 
 .up-arrow,
@@ -318,6 +361,7 @@ h1 .down-arrow {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  margin-top: 5px;
 }
 
 .right-sidebar form input {

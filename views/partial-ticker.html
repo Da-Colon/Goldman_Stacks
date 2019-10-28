@@ -64,14 +64,21 @@
 
                     </div>
 
-
-
-
+                    <div class="search-bar-container">
+                        <em>Find Another Ticker:</em>
+                        <div class="searchBar">
+                            <img src="/images/magnifying-glass.svg">
+                            <form action="/ticker" method="POST" id="search_form">
+                                <input type="text" name="ticker" id="tickerValue">
+                            </form>
+                        </div>
+                    </div>
                 </div>
+                
             </div>
 
             <div class="bottom small-card">
-                <h2 class="small-card-title">Company News</h2>
+                <h1 class="small-card-title">Company News</h1>
                 <hr> 
                 ${companyNewsData.map(info => `
                   <a href="${info.url}" target="_blank"><p>${info.headline}</p></a>
@@ -81,7 +88,7 @@
 
             <div class="right-sidebar">
                 <div class="indices small-card ticker">
-                    <h2 class="small-card-title">Your Portfolio</h2>
+                    <h1 class="small-card-title">Your Portfolio</h1>
                     <hr>
                     <div class="your-positions-datapoint">
                       <h3 class="datapoint-title">Currently Own: </h3>
