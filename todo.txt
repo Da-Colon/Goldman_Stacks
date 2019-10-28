@@ -1,0 +1,7 @@
+Search bar
+- Hook up to tickerList.js
+Query to pull transactions and single position for a given ticker.
+Router for the company page
+- /ticker/GE or something like that
+Router for buys/sells. Refresh company page after purchase?
+Hook up the new signup/login page with the partials

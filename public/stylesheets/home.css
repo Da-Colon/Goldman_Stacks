@@ -282,6 +282,44 @@ CENTER COLUMN
     display: block;
 }
 
+.search-bar-container {
+  margin: 40px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchBar {
+  padding: 0px 10px;
+  height: 35px;
+  border: 1px solid lightgray;
+  border-radius: 15px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 15px;
+  flex-grow: 1;
+}
+
+.searchBar img {
+  margin: 0px;
+  margin-right: 10px; 
+  height: 20px;
+}
+
+input {
+  border: none;
+  height: 100%;
+  width: 100%;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+}
+
 .large-card {
     margin-bottom: 30px;
 }
