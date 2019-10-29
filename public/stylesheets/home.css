@@ -202,6 +202,10 @@ CARD STYLES
     display: inline-block;
 }
 
+.single-item a:hover {
+  text-decoration: underline;
+}
+
 .left-sidebar hr,
 .right-sidebar hr {
     border: none;

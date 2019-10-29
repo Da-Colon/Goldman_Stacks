@@ -443,7 +443,7 @@ html {
   
   @media only screen and (max-width: 1100px) {
     main {
-        grid-template-columns: 1fr 7fr 1fr;
+        grid-template-columns: 1fr 9fr 1fr;
     }
     header {
         margin-bottom: 100px;
@@ -565,4 +565,5 @@ html {
     h1.logo-title {
       font-size: 1.75rem;
     }
+    
   }
