@@ -19,8 +19,8 @@
         <main>
 
             <div class="left-sidebar">
-
-                <div class="indices small-card ticker">
+                <!-- Company Information Section -->
+                <section class="indices small-card ticker">
 
                     <h1 class="small-card-title company-name">${companyStockData.companyName}</h1>
                     <h2 class="ticker-title">${companyStockData.symbol}</h2>
@@ -73,22 +73,23 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </section>
 
             </div>
-
-            <div class="bottom small-card">
+            <!-- Company News Section -->
+            <section class="bottom small-card">
                 <h1 class="small-card-title">Company News</h1>
                 <hr> ${companyNewsData.map(info => `
                 <a href="${info.url}" target="_blank">
                     <p>${info.headline}</p>
                 </a>
                 `).join('')}
-            </div>
+            </section>
 
 
             <div class="right-sidebar">
-                <div class="indices small-card ticker">
+                <!-- Buy and Sell Section -->
+                <section class="indices small-card ticker">
                     <h1 class="small-card-title">Your Portfolio</h1>
                     <hr>
                     <div class="your-positions-datapoint">
@@ -132,7 +133,7 @@
                         <input type="hidden" name="company_name" value="${companyStockData.companyName}" />
                         <button type="submit" class="sell-button">Sell</button>
                     </form>
-                </div>
+                </section>
             </div>
 
         </main>
