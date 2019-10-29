@@ -1,6 +1,8 @@
 // const https = require('https');
 const axios = require('axios');
-const fs = require('fs');
+const numeral = require('numeral');
+const _ = require('lodash');
+// const fs = require('fs');
 
 // SANDBOX URL
 // https://sandbox.iexapis.com/...
@@ -14,8 +16,20 @@ const fs = require('fs');
 
 // Returns the stock price AND key financial stats for a single company
 const getStockPrice = async(symbol) => {
-    const { data } = await axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=pk_fb66ab77a4b6406a838e0db01df0416c`)
-    // console.log(data)
+    const { data } = await axios.get(`https://sandbox.iexapis.com/stable/stock/${symbol}/quote?token=Tpk_8670b146a6084c8b9bba64c09c443eed`)
+
+    data.high = numeral(data.high).format('$0,0.00');
+    data.low = numeral(data.low).format('$0,0.00');
+    data.latestPriceStr = numeral(data.latestPrice).format('$0,0.00');
+    data.previousClose = numeral(data.previousClose).format('$0,0.00');
+    data.changeStr = numeral(data.change).format('$0,0.00');
+    data.changePercent = numeral(data.changePercent).format('0.0%');
+    data.ytdChangeStr = numeral(data.ytdChange).format('0.0%');
+    data.marketCap = numeral(data.marketCap).format('$0,0.0a');
+    data.previousVolume = numeral(data.previousVolume).format('0,0.0a');
+    data.week52High = numeral(data.week52High).format('$0,0.00');
+    data.week52Low = numeral(data.week52Low).format('$0,0.00');
+
     return { data }
     // Includes a lot of good stats. We should be able to just use this for the company page;
 
@@ -46,8 +60,8 @@ const getSymbolList = async() => {
 // Returns the latest 5 articles for a single company
 const getSingleCompanyNews = async(symbol) => {
 
-    const { data } = await axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/news/last/5?token=pk_fb66ab77a4b6406a838e0db01df0416c`)
-        // console.log(data)
+    const { data } = await axios.get(`https://sandbox.iexapis.com/stable/stock/${symbol}/news/last/5?token=Tpk_8670b146a6084c8b9bba64c09c443eed`)
+        
     return { data }
 
 }
@@ -57,12 +71,15 @@ const getMultipleCompanyNews = async(tickerArray) => {
 
     let tickerString = '';
     const arrLength = tickerArray.length;
+    shuffledTickerArray = _.shuffle(tickerArray);
 
     // Builds the string of ticker symbols
-    tickerArray.forEach((ticker) => {
-            if (ticker !== 'USERCASH') {
+    let numOfTickers = 0;
+    shuffledTickerArray.forEach((ticker) => {
+            if (ticker !== 'USERCASH' && numOfTickers < 5) {
                 tickerString += ticker;
-                !(tickerArray.indexOf(ticker) === arrLength - 1) && (tickerString += ',');
+                !(shuffledTickerArray.indexOf(ticker) === arrLength - 1) && (tickerString += ',');
+                numOfTickers++;
             }
         })
         // console.log(tickerString);

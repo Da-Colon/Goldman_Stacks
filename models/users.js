@@ -1,5 +1,6 @@
 const db = require("./conn");
 const bcrypt = require('bcryptjs')
+const Moment = require('moment');
 
 class User {
     constructor(first_name, last_name, email_address, password) {
@@ -32,9 +33,10 @@ class User {
 
     // Creates a new user in the database
     async addNewUser() {
+      const todayString = Moment(Date.now()).format('YYYY-MM-DD');
         try {
             const response = await db.one(
-                `INSERT INTO users (first_name, last_name, email, password) VALUES($1, $2, $3, $4) RETURNING id;`, [this.first_name, this.last_name, this.email_address, this.password]
+                `INSERT INTO users (first_name, last_name, email, password, portfolio_value, value_date) VALUES($1, $2, $3, $4, $5, $6) RETURNING id;`, [this.first_name, this.last_name, this.email_address, this.password, 100000, todayString]
             );
             return response;
         } catch (err) {
