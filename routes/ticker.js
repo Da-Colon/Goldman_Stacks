@@ -63,11 +63,11 @@ router.get("/:ticker", async(req, res, next) => {
 
     let userCash = await stacksDB.getPositionDataForUser(req.session.user_id, 'USERCASH');
     let cash = numeral(userCash.position[0].num_shares).format('$0,0.00');
-    console.log('USERCASH: ', cash);
+    // console.log('USERCASH: ', cash);
 
     res.render("template", {
         locals: {
-            title: "",
+            title: "GoldmanStacks",
             isLoggedIn: req.session.is_logged_in,
             userFirstName: req.session.first_name,
             user_id: req.session.user_id,

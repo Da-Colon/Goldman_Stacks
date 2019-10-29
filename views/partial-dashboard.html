@@ -21,13 +21,11 @@
 
             <div class="left-sidebar">
 
-                <div class="indices small-card ticker">
+                <!-- Markets Section -->
+                <section class="indices small-card ticker">
                     <h2 class="small-card-title">Market</h2>
 
                     <hr>
-
-
-
                     <div class="single-item">
                         <p>S&P 500</p>
                         <p class="small-ticker-value">
@@ -52,26 +50,26 @@
                             <span class=${market.EFA.quote.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${market.EFA.quote.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${( market.EFA.quote.changePercent * 100).toFixed(1)}%</p>
                     </div>
 
-                </div>
-
-                <div class="trending-stocks small-card ticker">
+                </section>
+                <!-- Trending Companies Section -->
+                <section class="trending-stocks small-card ticker">
                     <h2 class="small-card-title">Trending</h2>
 
                     <hr> ${trendingData.map(info => `
 
                     <div class="single-item">
                         <a href="/ticker/${info.symbol}">
-                          <p>${info.symbol}</p>
+                            <p>${info.symbol}</p>
                         </a>
                         <p class="small-ticker-value">
                             <span class=${info.changePercent> 0 ? 'up-arrow ' : 'down-arrow' }>${info.changePercent>0 ? '&uarr;' : '&darr;'}</span> ${( info.changePercent * 100).toFixed(1)}%</p>
                     </div>
                     `).join(' ')}
-                </div>
+                </section>
 
             </div>
-
-            <div class="center-column">
+            <!-- User Portfolio Section -->
+            <section class="center-column">
 
                 <div class="page-title">
                     <h1 class="your-portfolio">Your Portfolio</h1>
@@ -114,12 +112,12 @@
                         <h2><a href="/ticker/${item.symbol}">${item.symbol}</a></h2>
                         <div class="buy-sell">
                             <a href="/ticker/${item.symbol}">
-                              <div class="buy-button">Buy</div>
+                                <div class="buy-button">Buy</div>
                             </a>
                             <a href="/ticker/${item.symbol}">
-                              <div class="sell-button">Sell</div>
+                                <div class="sell-button">Sell</div>
                             </a>
-                          
+
                         </div>
                         <h2 class="up-down-percent"><span class=${(item.valueChange>= 0) ? (`"up-arrow">&uarr;`) : (`"down-arrow">&darr;`)}
                             </span> ${item.changePercent}</h2>
@@ -140,11 +138,11 @@
 
                 </div>
 
-            </div>
-
+            </section>
+            <!-- Leaderboard Section -->
             <div class="right-sidebar">
 
-                <div class="friend-leaderboard small-card ticker">
+                <section class="friend-leaderboard small-card ticker">
                     <h2 class="small-card-title">Leaderboard</h2>
                     <hr> ${leaders.map(leader => `
                     <div class="single-item">
@@ -154,9 +152,9 @@
                           </span> ${Math.round(leader.portfolio_growth * 1000) / 10}%</p>
                     </div>
                     `).join('')}
-                </div>
+                </section>
 
-                <div class="trending-news small-card">
+                <section class="trending-news small-card">
                     <h2 class="small-card-title">In the News</h2>
                     <hr> ${newsData.map(info => `
                     <a href="${info.url}" target="_blank">
@@ -164,15 +162,13 @@
                     </a>
                     `).join('')}
 
-                </div>
+                </section>
 
             </div>
 
         </main>
 
-        <footer>
 
-        </footer>
     </div>
     <script src="../scripts/tickerList.js"></script>
 

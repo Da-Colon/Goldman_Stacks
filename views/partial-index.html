@@ -1,11 +1,5 @@
-<!doctype html>
-<html>
-
 <head>
-    <meta charset="utf-8">
     <title>Goldman Stacks</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/stylesheets/indexStyles.css">
 </head>
@@ -13,57 +7,57 @@
 <body>
     <div class="header-background-overlay"></div>
     <div class="background-overlay">
+      
+      <header>
+        <div class="logo-group">
+          <img src="images/pancakes.svg" alt="pancake icon">
+          <span>Goldman Stacks</span>
+        </div>
+      </header>
 
-        <header>
-            <div class="logo-group">
-                <img src="/images/pancakes.svg">
-                <span>Goldman Stacks</span>
-            </div>
-        </header>
+      <main>
 
-        <main>
+        <div class="center-column">
 
-            <div class="center-column">
+          <div class="page-title">
+            <img class="large-logo-img" src="images/pancakes.svg" alt="pancake logo">
+            <h1 class="logo-title">Goldman Stacks</h1>
+          </div>
+          <hr>
+          <h2 class="subtitle">The free stock-trading simulation.</h2>
 
-                <div class="page-title">
-                    <img class="large-logo-img" src="/images/pancakes.svg">
-                    <h1 class="logo-title">Goldman Stacks</h1>
-                </div>
-                <hr>
-                <h2 class="subtitle">The free stock-trading simulation.</h2>
+          <div class="large-card">
 
-                <div class="large-card">
-
-                    <div id="signup-row" class="signup-row hide-row">
-                        <div class="signup-message">
-                            <h2>Sign up for a free account!</h2>
-                            <div id="login-instead-button" class="login-instead-button">Log In Instead</div>
-                        </div>
-
-                        <form action="/users/signup" method="POST">
-
-                            <label>First Name
-                  <input type="text" aria-placeholder="First Name" name="first_name" id="first_name" required>
+            <div id="signup-row" class="signup-row hide-row">
+              <div class="signup-message">
+                <h2>Sign up for a free account!</h2>
+                <div id="login-instead-button" class="login-instead-button">Log In Instead</div>
+              </div>
+              
+              <form action="/users/signup" method="POST" role="form">
+      
+                <label>First Name
+                  <input type="text" aria-label="First Name" name="first_name">
                 </label>
-                            <br>
-
-                            <label>Last Name
-                  <input type="text" aria-placeholder="Last Name" name="last_name" id="last_name" required>
+                <br>
+    
+                <label>Last Name
+                  <input type="text" aria-label="Last Name" name="last_name">
                 </label>
-                            <br>
-
-                            <label>Email Address
-                  <input type="text" aria-placeholder="Email Address" name="email_address" required>
+                <br>
+    
+                <label>Email Address
+                  <input type="email" aria-label="Email Address" name="email_address">
                 </label>
-                            <br>
-
-                            <label>Select Password
-                  <input type="password" aria-placeholder="Set Your Password" name="password" id="password" required>
+                <br>
+    
+                <label>Select Password
+                  <input type="password" aria-label="Set Your Password" name="password">
                 </label>
-                            <br>
-
-                            <label>Comfirm Password
-                  <input type="password" aria-placeholder="Comfirm Your Password" name="confirm_password" id="confirm_password" required>
+                <br>
+    
+                <label>Comfirm Password
+                  <input type="password" aria-label="Comfirm Your Password" name="comfirm_password">
                 </label>
                             <br>
 
@@ -85,8 +79,8 @@
                 </label>
                             <br>
 
-                            <label>Password
-                    <input type="password" aria-placeholder="Password" name="password">
+                <label>Password
+                    <input type="password" aria-label="Password" name="password">
                 </label>
                             <br>
 
@@ -105,9 +99,6 @@
 
         </main>
 
-        <footer>
-
-        </footer>
     </div>
     <script src="/scripts/indexScripts.js" type="text/javascript"></script>
 </body>

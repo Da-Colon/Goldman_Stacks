@@ -42,7 +42,7 @@ router.post("/signup", async(req, res, next) => {
     const user = new UserModel(first_name, last_name, email_address, hash);
 
     const addUser = await user.addNewUser();
-    console.log("Was User Added? ", addUser.id);
+    // console.log("Was User Added? ", addUser.id);
     if (addUser) {
         stacksDB.giveNewUserInitialCash(addUser.id);
         res.status(200).redirect("/");
@@ -58,8 +58,7 @@ router.post("/login", async(req, res, next) => {
     const user = new UserModel(null, null, email_address, password);
 
     const response = await user.login();
-    console.log(response);
-
+    // Check to see if user has signed up
     if (!!response.isValid) {
         const { id, first_name, last_name } = response;
 
