@@ -16,7 +16,11 @@ GoldmanStacks.app : A full-stack group project with a focus on back-end tools an
     -Special Thanks
 
 ## Decription
-  Goldman Stacks is a stock market simulation tool where each user is granted $100,000 to invest and test strategies in an almost-realtime environment. Current News articles relevant to the user's holdings are also displayed to aid in strategic decision making.
+    A real-time stock-trading simulation, combining live market data and news with server-side processing to create a robust environment to test out real trading strategies.
+
+    Webpages are generated with a server-side Express templating engine and a single page load involves multiple API calls, database queries, and calculations to bring all the data together.
+
+    Featured Technologies: Node.js, Express, PostgreSQL, and AWS
 
 ### Features
 * User sign up and log in
