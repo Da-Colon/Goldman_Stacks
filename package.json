@@ -20,7 +20,7 @@
         "express-session": "^1.17.0",
         "helmet": "^3.21.2",
         "http-errors": "~1.6.3",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.21",
         "moment": "^2.24.0",
         "morgan": "~1.9.1",
         "numeral": "^2.0.6",
