@@ -21,7 +21,7 @@
         "helmet": "^3.21.2",
         "http-errors": "~1.6.3",
         "lodash": "^4.17.15",
-        "moment": "^2.24.0",
+        "moment": "^2.29.4",
         "morgan": "~1.9.1",
         "numeral": "^2.0.6",
         "pg-promise": "^9.3.3",
